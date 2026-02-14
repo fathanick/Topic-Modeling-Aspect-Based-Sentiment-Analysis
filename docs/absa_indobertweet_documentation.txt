@@ -1,0 +1,369 @@
+================================================================================
+ASPECT-BASED SENTIMENT ANALYSIS (ABSA) DOCUMENTATION
+IndoBERTweet Analysis of Yogyakarta Tourism Reviews
+================================================================================
+
+Generated: 2026-02-02 15:21:12
+Input File: yogyakarta_tourism_reviews_preprocessed.csv
+Output Files:
+    - absa_indobertweet_results.csv (detailed review-level results)
+    - absa_indobertweet_summary.csv (aspect-level summary)
+    - absa_indobertweet_by_destination.csv (destination-level analysis)
+
+================================================================================
+1. METHODOLOGY
+================================================================================
+
+Aspect-Based Sentiment Analysis (ABSA) Overview:
+------------------------------------------------
+ABSA identifies specific aspects mentioned in reviews and determines the
+sentiment expressed toward each aspect separately, providing fine-grained
+insights into customer opinions.
+
+Model Selection:
+----------------
+- Primary Model: mdhugol/indonesia-bert-sentiment-classification
+- Model Type: Indonesian BERT-based Sentiment Classifier
+- Architecture: BERT/IndoBERT fine-tuned on Indonesian sentiment data
+
+Why IndoBERT/IndoBERTweet?
+--------------------------
+- Pre-trained on Indonesian text (including Twitter/social media)
+- Better understanding of Indonesian informal language
+- Fine-tuned for sentiment classification task
+- Handles Indonesian slang and abbreviations common in reviews
+
+Pipeline Steps:
+---------------
+1. Aspect Detection:
+   - Keyword-based matching with expanded Indonesian vocabulary
+   - Word boundary detection for accurate matching
+   - Context extraction around detected keywords
+
+2. Sentiment Classification:
+   - Extract text context around aspect keywords (100 chars window)
+   - Apply IndoBERT sentiment classifier to context
+   - Normalize labels to: positive, negative, neutral
+
+3. Aggregation:
+   - Aggregate sentiments per aspect across all reviews
+   - Calculate sentiment scores per destination
+   - Generate comprehensive statistics
+
+================================================================================
+2. ASPECT DEFINITIONS
+================================================================================
+
+12 Tourism Aspects Analyzed:
+
+
+Cleanliness (Kebersihan):
+--------------------------------------------------
+- Description: Cleanliness and hygiene of the destination
+- Keywords (8): bersih, kotor, sampah, jorok, rapi, terawat, kumuh, higenis
+
+
+Facilities (Fasilitas):
+--------------------------------------------------
+- Description: Available facilities and amenities
+- Keywords (11): toilet, parkir, mushola, kamar mandi, tempat duduk, gazebo, wc, musholla, masjid, fasilitas...
+
+
+Price/Value (Harga):
+--------------------------------------------------
+- Description: Pricing and value for money
+- Keywords (15): harga, murah, mahal, tiket, bayar, gratis, worth, terjangkau, biaya, tarif...
+
+
+Service (Pelayanan):
+--------------------------------------------------
+- Description: Service quality and staff behavior
+- Keywords (11): pelayanan, ramah, petugas, guide, staff, helpful, layanan, pegawai, penjaga, tour guide...
+
+
+Accessibility (Aksesibilitas):
+--------------------------------------------------
+- Description: Ease of access and transportation
+- Keywords (15): akses, jalan, jauh, dekat, mudah, transportasi, kendaraan, motor, mobil, ojek...
+
+
+Scenery/View (Pemandangan):
+--------------------------------------------------
+- Description: Natural beauty and scenery
+- Keywords (14): pemandangan, view, indah, cantik, bagus, sunset, sunrise, panorama, landscape, alam...
+
+
+Atmosphere (Suasana):
+--------------------------------------------------
+- Description: Ambiance and atmosphere
+- Keywords (13): suasana, nyaman, tenang, ramai, sepi, adem, sejuk, damai, asri, teduh...
+
+
+Food & Beverage (Makanan):
+--------------------------------------------------
+- Description: Food and beverage quality
+- Keywords (16): makanan, minuman, makan, kuliner, warung, resto, enak, seafood, ikan, minum...
+
+
+Safety (Keamanan):
+--------------------------------------------------
+- Description: Safety and security
+- Keywords (12): aman, bahaya, hati-hati, waspada, ombak, licin, curam, keamanan, selamat, berbahaya...
+
+
+Crowd Level (Keramaian):
+--------------------------------------------------
+- Description: Crowding and visitor density
+- Keywords (11): ramai, sepi, penuh, antri, crowded, pengunjung, wisatawan, padat, kosong, antrian...
+
+
+Photo Spots (Spot Foto):
+--------------------------------------------------
+- Description: Photography opportunities
+- Keywords (11): foto, selfie, instagramable, spot, background, estetik, photogenic, kamera, jepretan, dokumentasi...
+
+
+Historical/Cultural Value (Nilai Sejarah):
+--------------------------------------------------
+- Description: Historical and cultural significance
+- Keywords (13): sejarah, budaya, candi, heritage, kuno, bersejarah, museum, peninggalan, arkeologi, tradisi...
+
+
+================================================================================
+3. RESULTS SUMMARY
+================================================================================
+
+Dataset Statistics:
+-------------------
+- Total reviews analyzed: 1,530
+- Reviews processed: 1,530
+- Processing time: 159.16 seconds
+- Avg time per review: 0.104 seconds
+- Total aspect mentions: 5,413
+- Avg aspects per review: 3.54
+
+Aspect-Level Results:
+---------------------
+
+Scenery/View (scenery):
+  - Mentions: 957 (62.5% of reviews)
+  - Positive: 68 (7.1%)
+  - Negative: 848 (88.6%)
+  - Neutral: 41 (4.3%)
+  - Avg Confidence: 0.933
+  - Sentiment Score: -0.815
+
+Accessibility (accessibility):
+  - Mentions: 661 (43.2% of reviews)
+  - Positive: 62 (9.4%)
+  - Negative: 525 (79.4%)
+  - Neutral: 74 (11.2%)
+  - Avg Confidence: 0.901
+  - Sentiment Score: -0.700
+
+Price/Value (price):
+  - Mentions: 599 (39.2% of reviews)
+  - Positive: 67 (11.2%)
+  - Negative: 447 (74.6%)
+  - Neutral: 85 (14.2%)
+  - Avg Confidence: 0.900
+  - Sentiment Score: -0.634
+
+Food & Beverage (food):
+  - Mentions: 554 (36.2% of reviews)
+  - Positive: 50 (9.0%)
+  - Negative: 459 (82.9%)
+  - Neutral: 45 (8.1%)
+  - Avg Confidence: 0.920
+  - Sentiment Score: -0.738
+
+Atmosphere (atmosphere):
+  - Mentions: 496 (32.4% of reviews)
+  - Positive: 41 (8.3%)
+  - Negative: 435 (87.7%)
+  - Neutral: 20 (4.0%)
+  - Avg Confidence: 0.935
+  - Sentiment Score: -0.794
+
+Facilities (facilities):
+  - Mentions: 480 (31.4% of reviews)
+  - Positive: 50 (10.4%)
+  - Negative: 366 (76.2%)
+  - Neutral: 64 (13.3%)
+  - Avg Confidence: 0.906
+  - Sentiment Score: -0.658
+
+Crowd Level (crowd):
+  - Mentions: 382 (25.0% of reviews)
+  - Positive: 39 (10.2%)
+  - Negative: 306 (80.1%)
+  - Neutral: 37 (9.7%)
+  - Avg Confidence: 0.915
+  - Sentiment Score: -0.699
+
+Photo Spots (photo_spot):
+  - Mentions: 350 (22.9% of reviews)
+  - Positive: 34 (9.7%)
+  - Negative: 280 (80.0%)
+  - Neutral: 36 (10.3%)
+  - Avg Confidence: 0.909
+  - Sentiment Score: -0.703
+
+Cleanliness (cleanliness):
+  - Mentions: 322 (21.0% of reviews)
+  - Positive: 35 (10.9%)
+  - Negative: 278 (86.3%)
+  - Neutral: 9 (2.8%)
+  - Avg Confidence: 0.937
+  - Sentiment Score: -0.755
+
+Safety (safety):
+  - Mentions: 239 (15.6% of reviews)
+  - Positive: 15 (6.3%)
+  - Negative: 210 (87.9%)
+  - Neutral: 14 (5.9%)
+  - Avg Confidence: 0.939
+  - Sentiment Score: -0.816
+
+Historical/Cultural Value (historical_value):
+  - Mentions: 227 (14.8% of reviews)
+  - Positive: 13 (5.7%)
+  - Negative: 154 (67.8%)
+  - Neutral: 60 (26.4%)
+  - Avg Confidence: 0.885
+  - Sentiment Score: -0.621
+
+Service (service):
+  - Mentions: 146 (9.5% of reviews)
+  - Positive: 14 (9.6%)
+  - Negative: 118 (80.8%)
+  - Neutral: 14 (9.6%)
+  - Avg Confidence: 0.907
+  - Sentiment Score: -0.712
+
+================================================================================
+4. KEY INSIGHTS
+================================================================================
+
+Most Discussed Aspects:
+-----------------------
+1. Scenery/View: 957 mentions (62.5%)
+2. Accessibility: 661 mentions (43.2%)
+3. Price/Value: 599 mentions (39.2%)
+4. Food & Beverage: 554 mentions (36.2%)
+5. Atmosphere: 496 mentions (32.4%)
+
+Highest Rated Aspects (Strengths):
+----------------------------------
+1. Historical/Cultural Value: -0.621 score (5.7% positive)
+2. Price/Value: -0.634 score (11.2% positive)
+3. Facilities: -0.658 score (10.4% positive)
+
+Lowest Rated Aspects (Areas for Improvement):
+---------------------------------------------
+1. Safety: -0.816 score (87.9% negative)
+2. Scenery/View: -0.815 score (88.6% negative)
+3. Atmosphere: -0.794 score (87.7% negative)
+
+================================================================================
+5. DESTINATION ANALYSIS
+================================================================================
+
+Top 10 Destinations by Number of Aspect Mentions:
+-------------------------------------------------
+1. Pantai Kesirat: 236 aspect mentions (avg score: -0.758)
+2. Pantai Baru: 233 aspect mentions (avg score: -0.815)
+3. Pantai Nglambor: 229 aspect mentions (avg score: -0.668)
+4. Candi Prambanan: 219 aspect mentions (avg score: -0.815)
+5. Pantai Sundak: 214 aspect mentions (avg score: -0.821)
+6. Pantai Indrayanti: 208 aspect mentions (avg score: -0.824)
+7. Pantai Kukup: 207 aspect mentions (avg score: -0.769)
+8. Pantai Wediombo: 206 aspect mentions (avg score: -0.724)
+9. Museum Ullen Sentalu: 205 aspect mentions (avg score: -0.758)
+10. Situs Warungboto: 201 aspect mentions (avg score: -0.368)
+
+Best Performing Destinations by Aspect:
+---------------------------------------
+- Cleanliness: Bukit Bintang (+0.000)
+- Facilities: Makam Raja-Raja Imogiri (-0.273)
+- Price/Value: Pantai Depok (-0.087)
+- Service: Pantai Depok (+0.000)
+- Accessibility: Pantai Slili (-0.333)
+- Scenery/View: Candi Kalasan (-0.364)
+
+================================================================================
+6. INTERPRETATION GUIDE
+================================================================================
+
+Sentiment Score Interpretation:
+-------------------------------
+- Score = (Positive - Negative) / Total Mentions
+- Range: -1.0 (all negative) to +1.0 (all positive)
+
+  Score > +0.3  : Strong positive sentiment (strength)
+  Score +0.1 to +0.3: Moderately positive
+  Score -0.1 to +0.1: Mixed/Neutral sentiment
+  Score -0.3 to -0.1: Moderately negative
+  Score < -0.3  : Strong negative sentiment (needs improvement)
+
+Confidence Score:
+-----------------
+- Range: 0.0 to 1.0
+- Higher confidence indicates model certainty
+- Scores > 0.7 are considered reliable
+- Scores < 0.5 may need manual verification
+
+Practical Applications:
+-----------------------
+1. Identify strengths to highlight in marketing
+2. Prioritize improvements for low-scoring aspects
+3. Compare performance across destinations
+4. Track sentiment changes over time
+5. Target specific aspects for intervention
+
+================================================================================
+7. TECHNICAL DETAILS
+================================================================================
+
+Model Information:
+------------------
+- Model: mdhugol/indonesia-bert-sentiment-classification
+- Max sequence length: 256
+- Batch size: 16
+- Device: CPU
+
+Libraries Used:
+---------------
+- transformers: Hugging Face transformers library
+- torch: PyTorch backend
+- pandas: Data manipulation
+- numpy: Numerical operations
+- tqdm: Progress tracking
+
+Performance Notes:
+------------------
+- Total processing time: 159.16 seconds
+- Average per review: 0.104 seconds
+- For faster processing, use GPU (device=0)
+
+================================================================================
+8. LIMITATIONS AND CONSIDERATIONS
+================================================================================
+
+1. Keyword-based aspect detection may miss aspects expressed differently
+2. Context window extraction may not capture full sentiment context
+3. Indonesian informal language may affect accuracy
+4. Sarcasm and irony are difficult to detect
+5. Model was trained on general Indonesian text, not tourism-specific
+
+Recommendations for Improvement:
+--------------------------------
+1. Fine-tune model on tourism review dataset
+2. Expand keyword lists based on missed aspects
+3. Implement aspect-level sentiment fine-tuning
+4. Add domain-specific preprocessing
+5. Consider ensemble of multiple models
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

@@ -1,0 +1,633 @@
+================================================================================
+TOPIC MODELING DOCUMENTATION
+BERTopic Analysis of Yogyakarta Tourism Reviews
+================================================================================
+
+Generated: 2026-02-02 14:39:55
+Input File: yogyakarta_tourism_reviews_preprocessed.csv
+Output Files:
+    - topic_modeling_results.csv (reviews with topic assignments)
+    - topics_summary.csv (topic summary)
+    - topic_visualization_*.html (visualizations)
+    - bertopic_model/ (saved model)
+
+================================================================================
+1. METHODOLOGY
+================================================================================
+
+BERTopic Overview:
+------------------
+BERTopic is a topic modeling technique that leverages transformer-based
+embeddings and a class-based TF-IDF (c-TF-IDF) to create dense clusters
+allowing for easily interpretable topics while keeping important words
+in the topic descriptions.
+
+Pipeline Steps:
+1. Document Embedding: Convert documents to embeddings using Sentence-BERT
+2. Dimensionality Reduction: Use UMAP to reduce embedding dimensions
+3. Clustering: Use HDBSCAN to cluster similar documents
+4. Topic Representation: Extract topic words using c-TF-IDF
+
+Model Configuration:
+--------------------
+- Embedding Model: paraphrase-multilingual-MiniLM-L12-v2
+  (Multilingual model suitable for Indonesian text)
+
+- UMAP Parameters:
+  - n_neighbors: 15
+  - n_components: 5
+  - min_dist: 0.0
+  - metric: cosine
+  - random_state: 42
+
+- HDBSCAN Parameters:
+  - min_cluster_size: 10
+  - metric: euclidean
+  - cluster_selection_method: eom
+
+- Vectorizer:
+  - min_df: 2
+  - ngram_range: (1, 2) - unigrams and bigrams
+  - Additional Indonesian stop words applied
+
+================================================================================
+2. RESULTS SUMMARY
+================================================================================
+
+Dataset Statistics:
+-------------------
+- Total documents analyzed: 1,530
+- Processing time: 7.81 seconds
+
+Topic Discovery:
+----------------
+- Total topics discovered: 23
+- Outliers (unassigned documents): 661 (43.2%)
+- Documents assigned to topics: 869 (56.8%)
+
+================================================================================
+3. TOPIC DETAILS
+================================================================================
+
+
+Topic -1: OUTLIERS
+------------------
+- Document count: 661
+- Percentage: 43.20%
+- Description: Documents that don't fit well into any discovered topic
+
+
+Topic 0
+----------------------------------------
+- Document count: 79
+- Percentage: 5.16%
+- Top keywords: cafe, makanan, jalan, nongkrong, jogja, city, jagung, tempatnya, enak, bali
+
+
+Topic 1
+----------------------------------------
+- Document count: 66
+- Percentage: 4.31%
+- Top keywords: snorkeling, pantai, snorkling, nglambor, air, pantai nglambor, kano, laut, ombak, karang
+
+
+Topic 2
+----------------------------------------
+- Document count: 54
+- Percentage: 3.53%
+- Top keywords: seafood, ikan, makan, pantai, enak, udang, pantainya, segar, murah, warung
+
+
+Topic 3
+----------------------------------------
+- Document count: 53
+- Percentage: 3.46%
+- Top keywords: museum, tour, tur, guide, sejarah, tour guide, koleksi, mataram, menjelaskan, area
+
+
+Topic 4
+----------------------------------------
+- Document count: 50
+- Percentage: 3.27%
+- Top keywords: foto, spot, tiket, bagus, seikhlasnya, spot foto, bayar, parkir, tempatnya, masuk
+
+
+Topic 5
+----------------------------------------
+- Document count: 45
+- Percentage: 2.94%
+- Top keywords: jogja, malioboro, tugu, jalan, tugu jogja, ramai, rindu, kendaraan, jalan malioboro, lewat
+
+
+Topic 6
+----------------------------------------
+- Document count: 45
+- Percentage: 2.94%
+- Top keywords: foto, bali, fotografer, pantai, bagus, jasa, baju, rb, adat, fotonya
+
+
+Topic 7
+----------------------------------------
+- Document count: 44
+- Percentage: 2.88%
+- Top keywords: pantai, yogyakarta, rp, krakal, pasir, pantai krakal, drini, makan, laut, pantai drini
+
+
+Topic 8
+----------------------------------------
+- Document count: 42
+- Percentage: 2.75%
+- Top keywords: candi, pesanggrahan, kalasan, buddha, bangunan, dibangun, candi kalasan, merupakan, terdapat, relief
+
+
+Topic 9
+----------------------------------------
+- Document count: 40
+- Percentage: 2.61%
+- Top keywords: kapal, pelabuhan, nelayan, ikan, pantai, perahu, laut, dermaga, kapal nelayan, gesing
+
+
+Topic 10
+----------------------------------------
+- Document count: 38
+- Percentage: 2.48%
+- Top keywords: ombaknya, liat, pantainya, hati, sunset, bagus, pantai, sunrise, hati hati, pasang
+
+
+Topic 11
+----------------------------------------
+- Document count: 37
+- Percentage: 2.42%
+- Top keywords: toilet, mandi, kamar, kamar mandi, pantai, luas, mushola, tersedia, warung, pasir
+
+
+Topic 12
+----------------------------------------
+- Document count: 37
+- Percentage: 2.42%
+- Top keywords: parkir, mobil, masuk, jalan, tiket, ramai, rb, parkir mobil, area, motor
+
+
+Topic 13
+----------------------------------------
+- Document count: 35
+- Percentage: 2.29%
+- Top keywords: makam, raja, tangga, makam raja, sultan, naik, raja raja, sultan agung, imogiri, agung
+
+
+Topic 14
+----------------------------------------
+- Document count: 34
+- Percentage: 2.22%
+- Top keywords: hewan, zoo, mini, mini zoo, anak, spot, spot foto, foto, luas, tempatnya
+
+
+Topic 15
+----------------------------------------
+- Document count: 26
+- Percentage: 1.70%
+- Top keywords: camping, pantainya, pantai, jeep, tenda, tebing, cocok, bagus, akses, camp
+
+
+Topic 16
+----------------------------------------
+- Document count: 26
+- Percentage: 1.70%
+- Top keywords: berdoa, maria, doa, ziarah, umat, katolik, gua maria, sendangsono, gua, tenang
+
+
+Topic 17
+----------------------------------------
+- Document count: 24
+- Percentage: 1.57%
+- Top keywords: jeep, gumuk, pasir, gumuk pasir, seru, naik jeep, adrenalin, naik, video, panas
+
+
+Topic 18
+----------------------------------------
+- Document count: 22
+- Percentage: 1.44%
+- Top keywords: candi, foto, prambanan, candi prambanan, pemandangannya, cantik, tempatnya, taman, area, taman sari
+
+
+Topic 19
+----------------------------------------
+- Document count: 21
+- Percentage: 1.37%
+- Top keywords: tugu, yogyakarta, kota, prambanan, ikonik, kota yogyakarta, lampu, yogya, jogja, tugu jogja
+
+
+Topic 20
+----------------------------------------
+- Document count: 18
+- Percentage: 1.18%
+- Top keywords: solo, lbh, bener, pantai, candi, jm, hrg, roti, yogya, adventure
+
+
+Topic 21
+----------------------------------------
+- Document count: 17
+- Percentage: 1.11%
+- Top keywords: pantai, menikmati, bersantai, pantainya, suasana, ramai, suasana pantai, cocok, parangtritis, bagus
+
+
+Topic 22
+----------------------------------------
+- Document count: 16
+- Percentage: 1.05%
+- Top keywords: parkir, rb, masuk, pantai, tdk, rp, bayar, mobil, ramai, tpr
+
+
+================================================================================
+4. TOPIC DISTRIBUTION BY DESTINATION
+================================================================================
+
+
+Agrowisata Bhumi Merapi:
+  - Topic 0: 2 reviews
+  - Topic 4: 2 reviews
+  - Topic 12: 2 reviews
+  - Topic 14: 31 reviews
+  - Topic 18: 1 reviews
+
+Alun-alun Kidul:
+  - Topic 0: 4 reviews
+  - Topic 12: 3 reviews
+
+Bukit Bintang:
+  - Topic 0: 20 reviews
+  - Topic 4: 1 reviews
+  - Topic 5: 1 reviews
+  - Topic 7: 1 reviews
+  - Topic 18: 4 reviews
+  - Topic 19: 2 reviews
+
+Candi Borobudur:
+  - Topic 3: 1 reviews
+  - Topic 8: 2 reviews
+
+Candi Kalasan:
+  - Topic 0: 3 reviews
+  - Topic 3: 2 reviews
+  - Topic 8: 17 reviews
+  - Topic 12: 4 reviews
+  - Topic 19: 3 reviews
+  - Topic 20: 1 reviews
+
+Candi Mendut:
+  - Topic 0: 1 reviews
+  - Topic 4: 1 reviews
+  - Topic 8: 7 reviews
+
+Candi Prambanan:
+  - Topic 3: 8 reviews
+  - Topic 4: 1 reviews
+  - Topic 8: 3 reviews
+  - Topic 12: 1 reviews
+  - Topic 13: 1 reviews
+  - Topic 14: 1 reviews
+  - Topic 18: 5 reviews
+  - Topic 19: 1 reviews
+  - Topic 20: 2 reviews
+
+Gumuk Pasir Parangkusumo:
+  - Topic 0: 1 reviews
+  - Topic 4: 1 reviews
+  - Topic 6: 2 reviews
+  - Topic 7: 1 reviews
+  - Topic 11: 1 reviews
+  - Topic 12: 1 reviews
+  - Topic 17: 23 reviews
+  - Topic 20: 1 reviews
+
+Makam Raja-Raja Imogiri:
+  - Topic 0: 3 reviews
+  - Topic 3: 1 reviews
+  - Topic 4: 1 reviews
+  - Topic 5: 1 reviews
+  - Topic 8: 2 reviews
+  - Topic 13: 31 reviews
+
+Malioboro:
+  - Topic 0: 8 reviews
+  - Topic 5: 20 reviews
+  - Topic 6: 1 reviews
+  - Topic 12: 4 reviews
+  - Topic 19: 3 reviews
+
+================================================================================
+5. TOPIC-RATING RELATIONSHIP
+================================================================================
+
+Average rating per topic:
+
+Outliers: 4.64 stars (n=661)
+Topic 0: 4.35 stars (n=79)
+Topic 1: 4.89 stars (n=66)
+Topic 2: 4.59 stars (n=54)
+Topic 3: 4.85 stars (n=53)
+Topic 4: 4.68 stars (n=50)
+Topic 5: 4.96 stars (n=45)
+Topic 6: 4.64 stars (n=45)
+Topic 7: 4.52 stars (n=44)
+Topic 8: 4.93 stars (n=42)
+Topic 9: 4.45 stars (n=40)
+Topic 10: 4.84 stars (n=38)
+Topic 11: 4.73 stars (n=37)
+Topic 12: 4.68 stars (n=37)
+Topic 13: 4.86 stars (n=35)
+Topic 14: 4.76 stars (n=34)
+Topic 15: 4.65 stars (n=26)
+Topic 16: 5.00 stars (n=26)
+Topic 17: 4.71 stars (n=24)
+Topic 18: 4.95 stars (n=22)
+Topic 19: 4.67 stars (n=21)
+Topic 20: 5.00 stars (n=18)
+Topic 21: 4.82 stars (n=17)
+Topic 22: 4.38 stars (n=16)
+
+================================================================================
+6. SAMPLE DOCUMENTS PER TOPIC
+================================================================================
+
+
+Topic 0 - Sample Reviews:
+----------------------------------------
+- [Malioboro] 4 stars: kl jgn lupa sarapan dagen warung nasi enak cuma harganya murah masakan enak gudeg legend enak
+
+- [Malioboro] 5 stars: pas keluarga tempatnya rame aneka ragam barang makanan dijual tempatnya asik pokoknya soon balik
+
+- [Malioboro] 2 stars: ramenya oke makanan susah nemu enak knp samle bintang hirup asap rokok tolong diperketat
+
+
+Topic 1 - Sample Reviews:
+----------------------------------------
+- [Pantai Drini] 5 stars: senang bermain kano sepuasnya anak anak ribu kano plus tikar payung air pantai bermain kanonya kotor sisi sebelahnya pantainya jernih ombaknya keras semoga kebersihan keindahan pantai senantiasa terja...
+
+- [Pantai Drini] 5 stars: pas weekend pantai sepi puas main kano explore pantai
+
+- [Pantai Drini] 5 stars: pantai favorit anak anak main perahu cano
+
+
+Topic 2 - Sample Reviews:
+----------------------------------------
+- [Pantai Drini] 5 stars: pantai favorit pdhal rameee jual makanan gx takut kelaperan makin makin pembangunan
+
+- [Pantai Drini] 5 stars: pantai favorit kecil nyangka seramai aman buat main pasir anak sewa tiker payung bayar tanpa durasi es degan enak seafood prepare bawa obat anti alergi buat mudah alergi
+
+- [Pantai Slili] 4 stars: parkir kamar mandi k tarif kamar mandi seafoodnya kebanyakan goreng pas libur rame poll
+
+
+Topic 3 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: week day pengunjung ramai mungkin kunjungan siswa murid murid melakukan study tour mudah memahami sejarah nilai terkandung bangunan candi disarankan menggunakan tour guide resmi terdapat area entrance...
+
+- [Candi Prambanan] 5 stars: fasilitas kawasan wisata lengkap area parkir luas jalur pedestrian rapi serta pusat informasi museum mini membuat pengalaman berkunjung semakin nyaman edukatif pelayanan petugas ramah profesional memb...
+
+- [Candi Prambanan] 4 stars: situs candi luas buat dijelajahi museumnya dalamnya sewa sepeda capek jalan kaki berkeliling candi htm wisatawan lokal rb tiket terusan harga mahal mending biar leluasa eksplor panas pintu keluar kuli...
+
+
+Topic 4 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: kunjungan terbaik panas terik order ticket onsite pilihan dewasa anak max usia
+
+- [Tugu Jogja] 5 stars: iconic makin makin rame ambil foto video sisi manapun menarik menurut ambil lantai resto depan tugu lupa buat berfoto didepannya pakai jasa forografer ribu foto cakep
+
+- [Tugu Jogja] 5 stars: jogja foto photographer foto foto seru disekitarnya toko hotel
+
+
+Topic 5 - Sample Reviews:
+----------------------------------------
+- [Malioboro] 5 stars: bagus poll rekomen buat jalan jalann rindu jogjaa apalagi malioboro aaaa rindu bangett jangan lupa kalau malioboro puas puas jalan jalan disanaa krna asli kalau pulang rinduu bangett jogja apalagi mal...
+
+- [Malioboro] 5 stars: malioboro gagal apalagi gerimis semakin nambah rindu
+
+- [Malioboro] 5 stars: senang jalan malioboro ramai seru jalan tutup bebas kendaraan motor mobil syukurnya hotel tmpt nginap pas depan jalan malioboro
+
+
+Topic 6 - Sample Reviews:
+----------------------------------------
+- [Malioboro] 5 stars: lumayan antri foto dibawah tulisan jl malioboro apalgi spot bagus terang fotografer berbayar segan foto menggunakan hp gass jangan lupa bawa air mineral karna menyusuri malioboro panjanggg melelahkan ...
+
+- [Pantai Drini] 5 stars: ramai tukang foto siap abadikan momen foto bayar rp murah hasilnya lumayan estetik pemandangannya cantik tebing laut biru spot duduk tenang buat menikmati angin pantai cocok buat healing foto foto sek...
+
+- [Pantai Drini] 5 stars: pantai bagus kalau jangan pas liburan penuh macet suka jasa tukang fotonya hasilnya bagus foto harga tukang fotonya arahin gaya makanan lautnya enak harga terjangkau kalau souvenirmya tau soalnya beli...
+
+
+Topic 7 - Sample Reviews:
+----------------------------------------
+- [Tugu Jogja] 5 stars: viralll apalagi besar baru takbiran pasti namanya kirab heboh cocok buat rasain sensasi meriah tetep rasa indonesia asli jogja ramah tamah kalau baru tinggal pasti kaget anw recommended tugu karna lan...
+
+- [Pantai Drini] 5 stars: tolong adain sewa motor ojek setempat ajang aji mumpung wisatawan kapok semoga kedepannya akses angkot apapun mengantarkan keliling pantai م اش آء الل ه viewnya indah hati hati
+
+- [Pantai Drini] 4 stars: pantai drini memiliki pemandangan indah pasir bersih cocok liburan keluarga pantai terletak deretan pantai selatan yogyakarta berdekatan pantai sepanjang kukup mesra baron harga tiket masuknya terjang...
+
+
+Topic 8 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: candi prambanan merupakan kompleks candi hindu terawat baik memiliki nilai sejarah serta arsitektur kuat tata kawasan luas tertata rapi jalur pejalan kaki nyaman berkeliling detail relief struktur can...
+
+- [Candi Prambanan] 5 stars: candi prambanan cuma tumpukan batu kisah megah arsitektur hindu tertinggi asia tenggara memukau relief ramayana hidup lambang toleransi agama legenda roro jonggrang melegenda menjadikannya warisan dun...
+
+- [Candi Prambanan] 5 stars: candi prambanan mahakarya sejarah indonesia memancarkan keindahan kebesaran peradaban masa terletak perbatasan yogyakarta jawa kompleks candi berdiri megah arsitektur menakjubkan relief ukirannya menc...
+
+
+Topic 9 - Sample Reviews:
+----------------------------------------
+- [Pantai Drini] 5 stars: wisata pantai gunungkidul memang indah satunya pantai drini menyenangkan berkunjung jarak pantai pantai lainnya saling berdekatan langsung pindah kalau puas dipantai warung makan seafood murah enak di...
+
+- [Pantai Gesing] 5 stars: pantainya berada pinggir tebing memanjakan mata pemandangan laut lepas nan indah jalannya lebar sisi terdapat dermaga bersandar perahu nelayan melaut menjadi spot mancing bagi penggemar mancing mania ...
+
+- [Pantai Gesing] 4 stars: pantai gesing berubah pelabuhan tpr k masuk melewati gerbang gesing wonderland kalau cuma pelabuhan lurus beli tiket parkir mobil dekat warung k masjid turun pelabuhan mancing area pelabuhan sepi suas...
+
+
+Topic 10 - Sample Reviews:
+----------------------------------------
+- [Pantai Drini] 5 stars: drini pantainya bagus rame penyewaan duduk bawah payung bukit dinaikin tambah retribusi bukitnya liat pantai lautannya luas tentu liat sunset hati hati jangan tergelincir pasang cocok buat main air ha...
+
+- [Pantai Drini] 4 stars: viewnya bagus pulau drini liat sunrise area pantai tdk besar ombaknya buat anak main
+
+- [Pantai Drini] 5 stars: viewnya oke ombaknya dibilang bersahabat lah buat main main pinggiran pantai sebenernya kalau cerah bakal cakep kalau lihat sunset atas pulau drini
+
+
+Topic 11 - Sample Reviews:
+----------------------------------------
+- [Pantai Drini] 5 stars: bagus tempatnya kalau sarankan pas surut biar estetik mandi ombak berhati hati ombak pantai selatan cenderung tinggi parkir pilihan makan seru lah
+
+- [Pantai Drini] 5 stars: htm k pantai pasir putih bermain kano renang aman anak penyewaan gazebo k sepuasnya toilet mushola warung tersebar pemandangan indah dilihat puncak drini ok mantap
+
+- [Pantai Drini] 5 stars: pantai drini pantai wisata keluarga fasilitas lengkap mushola toilet warung warung tak bermain air pengunjung berkano menaiki bukit melalui jembatan pantai drini pantai berbeda pantai memiliki pantai ...
+
+
+Topic 12 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: baru prambanan anter putri sewayang sbg panitia konser sekalian liburan jogja sekitarnya lokasi aman nyaman serem tmpt parkirnya gelap
+
+- [Malioboro] 5 stars: rapi aman tertata konsep integrated urban tuorismnya bagus sampah berserakan plastik organik perokok outdoor sembarangan market productnya beragam dg harga bersaing terjangkau tingal pilih tinggal pil...
+
+- [Malioboro] 5 stars: jalan ramai crowded full pengunjung full hiburan live music band indi keren tinggal pilih modern tradisional pusat beli baju makanan mainan gantungan kunci pokoknya lengkap penawaran menarik jarak par...
+
+
+Topic 13 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 4 stars: candi peninggalan kerajaan mataram mengingat tingginya peradaban nenek moyang tiket masuk weekday dewasa rp k anak rp k sedangkan weekend rp k anak rp k tersedia tiket terusan istana ratu boko dg tike...
+
+- [Pantai Slili] 4 stars: lantai slili november jama pengajian al karimah kartasura
+
+- [Pantai Kukup] 4 stars: alhamdulillaah kembali cantik kukup pas libur lebaran pengunjung pas pengelola pelaku usaha berupaya menjaga kebersihan pengunjung nyampah sembarangan
+
+
+Topic 14 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: seliweran jalanan prambanan sekalipun mampir akhirnya awal kesampean mampir jangan lupa pake sunscreen jeunk puanas pake baju nyaman jangan lupa kacamata jugaaa kompleksnya bersiiiihhhhh isinya cuma c...
+
+- [Agrowisata Bhumi Merapi] 4 stars: wisata daerah kaliurang tempatnya bersih terawat sejuk permainan mungkin cuma naik kuda permainan kecil bayar aksesnya spot foto mirip santorini lumayan besar berputar tempatnya mirip labirin mini zoo...
+
+- [Agrowisata Bhumi Merapi] 5 stars: recommended buat suka foto² aesthetic spot fotonya mini zoo pengunjung foto pegang langsung hewan² gemesin pol cocok buat liburan bareng keluarga pasangan kmrin perginya adekku lumayan momen bonding k...
+
+
+Topic 15 - Sample Reviews:
+----------------------------------------
+- [Pantai Parangtritis] 4 stars: pantai luas panjang hamparan pasirnya ombak bersahabat cocok liburan keluarga teman sahabat tercinta penyewaan mobil jeep ktv saat panasnya sungguh terasa jasa poto sekaligus cetak ditempat harga rp p...
+
+- [Pantai Parangtritis] 3 stars: pantainya luas aman jeep ugal ugalan padahal area pantai padahal anak² berlalu lalang maaf pantainya biasa
+
+- [Pantai Parangtritis] 5 stars: senja pantainya indah tersedia jeep kereta kuda motor menjelajah tepian pantai berfoto ria
+
+
+Topic 16 - Sample Reviews:
+----------------------------------------
+- [Sendang Sono] 5 stars: ziarah umat katolik suasananya tenang damai menuju jalannya gelap saat karna minimnya lampu lokasi penerangan masuk lokasi pedagang menjual benda rohani dibeli dg tunai qris transfer sayangnya dibeber...
+
+- [Sendang Sono] 5 stars: ziarah perbukitan menoreh jalan diakses kendaraan roda roda nyaman hawa udara sejuk mata air segar arsitektur menawan sejarah pertumbuhan iman mendalam fasilitas toilet parkir makan toko benda rohani ...
+
+- [Sendang Sono] 5 stars: ziarah adem kenangan berpuluh purnama baru dtg lg berdoa kusuk rame dpn patungnya entah hening berisik plg krng akses jalannya menuju lokasi hancur
+
+
+Topic 17 - Sample Reviews:
+----------------------------------------
+- [Pantai Parangtritis] 5 stars: pantai mudah dijangkau capek dikunjungi kebetulan kemaren pesan paket jeep snagat menyenangkan driver informatif kocak seru saran kalau coba naik jeep jalur gumuk pantai jangan makan nahan kencing amb...
+
+- [Gumuk Pasir Parangkusumo] 5 stars: mampir pas panas terik bangettt pasirnya puanass menjelang cuacanya mendung tempatnya menarik pilihan wisata selain pantainya gumuk pasirnya luas keliling pake jeep minusnya jalan kaki kena debu pas j...
+
+- [Gumuk Pasir Parangkusumo] 5 stars: berpetualang seru gumuk pasir menggunakan jeep terbuka awalnya memang berekspektasi pengalaman jeep tour ternyata perjalanan menikmati perjalanan panjang menyusuri pantai rute ekstrim hati hati spot b...
+
+
+Topic 18 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: berkunjung candi prambanan jujur bikin kagum masuk area candi langsung terasa megahnya bangunan bangunan candi berdiri tinggi kokoh suasananya tenang luas bikin pelan pelan jalan menikmati sudutnya ar...
+
+- [Candi Prambanan] 5 stars: foto candi prambanan memuaskan pemandangannya megah latar candi simetris area luas menjelang sunset terbaik cahayanya lembut hasil foto terlihat estetik spot foto tertata rapi informasi sejarah tempat...
+
+- [Candi Prambanan] 5 stars: candi prambanan benar benar megah menakjubkan kompleks candinya luas bersih terawat baik sudutnya punya nilai sejarah arsitektur luar biasa indah disarankan datang panas saat berkeliling sekalian biar...
+
+
+Topic 19 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 3 stars: day yogyakarta okt akhir perjalanan yogyakarta tepat sabtu abis sarapan nasi rames bang udin deket halte trans jogja mangkubumi sekalian naik trans jogja candi prambanan perjalanan kayanya berenti hal...
+
+- [Malioboro] 5 stars: jalan malioboro jantungnya yogyakarta hidup penuh warna ramai lampu lampu pedagang kaki musik jalanan aroma sate gudeg bikin suasana makin khas pas buat belanja nongkrong menikmati vibe jogja hangat
+
+- [Malioboro] 4 stars: malioboro merupakan pusat kota yogyakarta dg kepadatan lintas ditemukan bermacam toko vaik restaurant mart dsb nta
+
+
+Topic 20 - Sample Reviews:
+----------------------------------------
+- [Candi Prambanan] 5 stars: first time candi prambanan dtg jm loket buka buka jm beli tiket online trnyta pake dana bawa roti tas tas cek roti diambil trs dititipin diambil pintu kluar pdhl sarapan dtawarin dimakan dlu tdk roti ...
+
+- [Candi Prambanan] 5 stars: candi terindah yogyakarta menuju candi menggunakan krl ygy palur turun stasiun brambanan jalan kaki skitar meter candi prambanan htm rp bsa menikmati keindahan keindahan candi
+
+- [Pantai Drini] 5 stars: wahana kano anak² bermain puas pulau foto kids friendly
+
+
+Topic 21 - Sample Reviews:
+----------------------------------------
+- [Pantai Drini] 3 stars: pantainya rame weekend tepat berekreasi baik pilih weekday cari pantai luas nyaman
+
+- [Pantai Parangtritis] 5 stars: main pantai parangtritis menurut pantai memang punya suasana khas langsung terasa angin pantainya kencang hamparan pasir hitam luas area pantainya besar terbuka enak buat jalan jalan santai menikmati ...
+
+- [Pantai Parangtritis] 5 stars: seru pantainya rame pool saat nataru untung cuaca bagus cuma jalanan serem wkwkkw
+
+
+Topic 22 - Sample Reviews:
+----------------------------------------
+- [Pantai Parangtritis] 4 stars: masuk kawasan bantul parangtritis gerbang besar masuk kendaraan bayar rb kirain bayar ternyata dalamnya bayar parkir mobil rb motor rb rb kalau pindah parkir bayar parkir beda zona katanya pindah park...
+
+- [Pantai Indrayanti] 5 stars: pantainya landai pasirnya putih bersih persewaan gazeebo sepuasnya biaya parkir mobil
+
+- [Pantai Indrayanti] 5 stars: pantai pasir putih indah luas jadinya ramai menggunakan kendaraan biaya parkir roda rp rp sedangkan roda rp rombongan menggunakan payung pantai gazebo payung pantai dikenakan biaya sebesar rp unit men...
+
+
+================================================================================
+7. INTERPRETATION GUIDE
+================================================================================
+
+How to Interpret Topics:
+------------------------
+1. Each topic represents a cluster of semantically similar reviews
+2. Topic keywords indicate the main themes discussed in that cluster
+3. Higher document counts indicate more prevalent themes
+4. Outliers (-1) are reviews that don't fit any clear topic pattern
+
+Possible Topic Interpretations:
+-------------------------------
+Based on the keywords, topics may represent:
+- Facilities and amenities (parkir, toilet, fasilitas)
+- Natural beauty and scenery (pantai, pemandangan, indah)
+- Historical/cultural aspects (candi, sejarah, budaya)
+- Experience and atmosphere (suasana, nyaman, bagus)
+- Food and services (makanan, harga, murah)
+- Activities (foto, jalan, naik)
+
+Using the Results:
+------------------
+1. Review 'topic_modeling_results.csv' for individual review topics
+2. Check 'topics_summary.csv' for topic overview
+3. Open HTML visualizations for interactive exploration
+4. Use the saved model for predicting topics on new reviews
+
+================================================================================
+8. VISUALIZATIONS
+================================================================================
+
+Generated Visualizations:
+-------------------------
+1. topic_visualization_intertopic_distance.html
+   - Interactive 2D map showing topic relationships
+   - Distance between topics indicates similarity
+
+2. topic_visualization_barchart.html
+   - Top words per topic with their importance scores
+
+3. topic_visualization_hierarchy.html
+   - Hierarchical clustering of topics
+   - Shows how topics relate to each other
+
+4. topic_visualization_heatmap.html
+   - Topic similarity matrix
+   - Darker colors indicate higher similarity
+
+================================================================================
+9. TECHNICAL DETAILS
+================================================================================
+
+Libraries Used:
+- bertopic: Topic modeling
+- sentence-transformers: Document embeddings
+- umap-learn: Dimensionality reduction
+- hdbscan: Clustering
+- scikit-learn: CountVectorizer, metrics
+- pandas: Data manipulation
+- numpy: Numerical operations
+
+Model Persistence:
+- Model saved to: bertopic_model/
+- Can be loaded with: BERTopic.load("bertopic_model")
+
+Reproducing Results:
+- Random state set to {RANDOM_STATE} for reproducibility
+- Same results can be obtained by running with identical parameters
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

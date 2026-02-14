@@ -1,0 +1,490 @@
+================================================================================
+ASPECT-BASED SENTIMENT ANALYSIS (ABSA) DOCUMENTATION
+Using Large Language Model (LLM) with Groq API
+================================================================================
+
+Generated: 2026-02-13
+Script: src/sentiment_analysis/absa_llm_groq.py
+Input: data/processed/yogyakarta_tourism_reviews_preprocessed.csv
+Output Directory: output/absa_llm_groq/
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+This module performs Aspect-Based Sentiment Analysis (ABSA) on Indonesian
+tourism reviews using Large Language Model inference via Groq API. The approach
+uses few-shot prompting with Llama 3.1 to identify tourism-specific aspects
+and classify sentiment for each aspect mentioned in reviews.
+
+Key Features:
+- FREE API tier: 30 requests/min, 14,400 requests/day
+- Ultra-fast inference via Groq's LPU (Language Processing Unit)
+- Few-shot prompting for domain adaptation without fine-tuning
+- Multi-aspect detection per review
+- Evidence extraction for sentiment justification
+- Batch processing for API efficiency
+
+================================================================================
+2. MODEL CONFIGURATION
+================================================================================
+
+Model Selection:
+----------------
+- Model Name: llama-3.1-8b-instant
+- Provider: Groq (https://console.groq.com)
+- Alternative Models Available:
+  * llama-3.1-70b-versatile (larger, more accurate, slower)
+  * mixtral-8x7b-32768 (mixture of experts)
+  * gemma2-9b-it (Google's Gemma 2)
+
+API Configuration:
+------------------
+BATCH_SIZE = 10          # Reviews processed per API call
+RATE_LIMIT_DELAY = 3.0   # Seconds between API requests
+MAX_RETRIES = 3          # Retry attempts for failed requests
+MAX_TOKENS = 4096        # Maximum tokens in model response
+
+API Setup:
+----------
+1. Obtain FREE API key from: https://console.groq.com/keys
+2. Set environment variable: export GROQ_API_KEY="your-api-key"
+   OR pass via command line: python absa_llm_groq.py --api-key YOUR_KEY
+
+================================================================================
+3. TOURISM ASPECTS DEFINITION
+================================================================================
+
+The following 12 tourism-specific aspects are analyzed:
+
++-------------------+------------------------+----------------------+
+| Aspect Key        | English Name           | Indonesian Name      |
++-------------------+------------------------+----------------------+
+| cleanliness       | Cleanliness            | Kebersihan           |
+| facilities        | Facilities             | Fasilitas            |
+| price             | Price/Value            | Harga                |
+| service           | Service                | Pelayanan            |
+| accessibility     | Accessibility          | Aksesibilitas        |
+| scenery           | Scenery/View           | Pemandangan          |
+| atmosphere        | Atmosphere             | Suasana              |
+| food              | Food & Beverage        | Makanan              |
+| safety            | Safety                 | Keamanan             |
+| crowd             | Crowd Level            | Keramaian            |
+| photo_spot        | Photo Spots            | Spot Foto            |
+| historical_value  | Historical/Cultural    | Nilai Sejarah        |
++-------------------+------------------------+----------------------+
+
+Aspect Selection Rationale:
+---------------------------
+These aspects were selected based on:
+1. Common tourism evaluation criteria from literature
+2. Preliminary exploration of Yogyakarta tourism reviews
+3. Relevance to destination management decisions
+4. Coverage of both tangible (facilities) and intangible (atmosphere) factors
+
+================================================================================
+4. PROMPT ENGINEERING
+================================================================================
+
+4.1 System Prompt
+-----------------
+The system prompt establishes the LLM's role and provides classification rules:
+
+"""
+You are an expert Indonesian tourism review sentiment analyzer. Analyze reviews
+and identify:
+1. Aspects mentioned (cleanliness, facilities, price, service, accessibility,
+   scenery, atmosphere, food, safety, crowd, photo_spot, historical_value)
+2. Sentiment per aspect: POSITIVE, NEGATIVE, or NEUTRAL
+3. Evidence: specific words indicating sentiment
+
+SENTIMENT RULES:
+- POSITIVE: bagus, indah, bersih, nyaman, worth it, mantap, keren, enak, ramah,
+            murah, lengkap, recommended, luar biasa, memuaskan
+- NEGATIVE: kotor, mahal, jelek, susah, bahaya, kurang, buruk, kecewa,
+            mengecewakan, jauh, sempit, rusak
+- NEUTRAL: biasa aja, lumayan, cukup, factual statements
+
+INDONESIAN SLANG:
+- gak/nggak/ga = tidak (not)
+- banget/bgt = very
+- mantap/mantul = excellent
+- keren = cool/awesome
+- zonk = disappointing
+
+Return ONLY valid JSON array (no markdown):
+[{"review_id": 1, "aspects": [{"aspect": "scenery", "sentiment": "positive",
+"evidence": "indah banget"}], "overall_sentiment": "positive"}]
+"""
+
+4.2 Few-Shot Examples
+---------------------
+Three carefully crafted examples demonstrate the expected output format:
+
+EXAMPLE 1 - Positive Review (5 stars):
+Input:  "Candi Prambanan nggak pernah gagal bikin kagum. Areanya luas, bersih.
+         Fasilitasnya lengkap. Worth it banget!"
+Output: [{"review_id": 1, "aspects": [
+           {"aspect": "scenery", "sentiment": "positive", "evidence": "bikin kagum"},
+           {"aspect": "cleanliness", "sentiment": "positive", "evidence": "bersih"},
+           {"aspect": "facilities", "sentiment": "positive", "evidence": "lengkap"},
+           {"aspect": "price", "sentiment": "positive", "evidence": "worth it"}
+         ], "overall_sentiment": "positive"}]
+
+EXAMPLE 2 - Mixed Review (3 stars):
+Input:  "Pemandangannya bagus, tapi parkirnya jauh dan mahal. Toiletnya kurang
+         bersih."
+Output: [{"review_id": 2, "aspects": [
+           {"aspect": "scenery", "sentiment": "positive", "evidence": "bagus"},
+           {"aspect": "accessibility", "sentiment": "negative", "evidence": "jauh"},
+           {"aspect": "price", "sentiment": "negative", "evidence": "mahal"},
+           {"aspect": "cleanliness", "sentiment": "negative", "evidence": "kurang bersih"}
+         ], "overall_sentiment": "mixed"}]
+
+EXAMPLE 3 - Service-Focused Review (4 stars):
+Input:  "Petugasnya ramah banget dan helpful. Pelayanannya memuaskan."
+Output: [{"review_id": 3, "aspects": [
+           {"aspect": "service", "sentiment": "positive", "evidence": "ramah,
+            helpful, memuaskan"}
+         ], "overall_sentiment": "positive"}]
+
+4.3 Batch Prompt Construction
+-----------------------------
+Reviews are grouped into batches for efficient processing:
+
+def create_batch_prompt(reviews_batch):
+    prompt = FEW_SHOT_USER  # Few-shot examples
+    for i, review in enumerate(reviews_batch, 1):
+        text = review.get('original_text', review.get('cleaned_text', ''))[:800]
+        stars = review.get('stars', 'N/A')
+        prompt += f'\nReview {i} ({stars} stars): "{text}"'
+    prompt += "\n\nOutput:"
+    return prompt
+
+- Maximum text length per review: 800 characters (truncated if longer)
+- Star rating included to provide context
+- Reviews numbered for alignment with JSON output
+
+================================================================================
+5. PROCESSING PIPELINE
+================================================================================
+
+5.1 Data Loading
+----------------
+- Input: Preprocessed CSV file with columns:
+  * destination: Tourism destination name
+  * username: Reviewer's display name
+  * stars: Rating (1-5)
+  * original_text: Original review text
+  * cleaned_text: Preprocessed text
+- Optional sampling for testing: --sample N
+
+5.2 Batch Processing
+--------------------
+Reviews are processed in batches of 10:
+
+1. Group reviews into batches
+2. For each batch:
+   a. Create batch prompt with few-shot examples
+   b. Send to Groq API
+   c. Parse JSON response
+   d. Extract aspect-sentiment pairs
+   e. Record results
+   f. Wait for rate limit delay (3 seconds)
+
+5.3 API Call Implementation
+---------------------------
+def analyze_batch(client, reviews_batch, results_tracker, retry_count=0):
+    response = client.chat.completions.create(
+        model=MODEL_NAME,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=MAX_TOKENS,
+        temperature=0.1  # Low temperature for consistent outputs
+    )
+
+Temperature Setting:
+- Value: 0.1 (low)
+- Rationale: Ensures consistent, deterministic sentiment classifications
+- Higher values would introduce more variation in outputs
+
+5.4 JSON Extraction
+-------------------
+The model response is parsed using multiple fallback strategies:
+
+def extract_json_from_response(response_text):
+    # Strategy 1: Remove markdown code blocks
+    text = re.sub(r'```(?:json)?\s*', '', text)
+    text = re.sub(r'```', '', text)
+
+    # Strategy 2: Find JSON array pattern
+    match = re.search(r'\[[\s\S]*\]', text)
+    if match:
+        json_str = match.group(0)
+        # Clean trailing commas
+        json_str = re.sub(r',\s*}', '}', json_str)
+        json_str = re.sub(r',\s*]', ']', json_str)
+        return json.loads(json_str)
+
+    # Strategy 3: Find individual JSON objects
+    for match in re.finditer(r'\{[^{}]*(?:"aspects"\s*:\s*\[[^\]]*\][^{}]*)?\}', text):
+        obj = json.loads(match.group(0))
+        if 'aspects' in obj:
+            objects.append(obj)
+
+5.5 Error Handling
+------------------
+Robust error handling with retry logic:
+
+- Rate Limit Errors (429):
+  * Wait 30 * (retry_count + 1) seconds
+  * Exponential backoff up to 3 retries
+
+- Other Errors:
+  * Wait 5 * (retry_count + 1) seconds
+  * Log error and continue
+  * Mark review as 'failed' if all retries exhausted
+
+5.6 Result Recording
+--------------------
+For each review, the following are recorded:
+
+- destination: Tourism destination name
+- username: Reviewer's display name
+- stars: Original star rating
+- original_text: Review text (truncated to 500 chars)
+- analysis_status: 'success' or 'failed'
+- aspects_detected: Comma-separated list of aspects found
+- aspect_sentiments: Formatted as "aspect:sentiment; ..."
+- num_aspects: Count of aspects detected
+- overall_sentiment: positive/negative/neutral/mixed
+
+Per-aspect columns:
+- {aspect}_sentiment: positive/negative/neutral or empty
+- {aspect}_evidence: Words that triggered the sentiment
+
+================================================================================
+6. OUTPUT FILES
+================================================================================
+
+6.1 absa_llm_results.csv
+------------------------
+Individual review-level results with all aspect sentiments.
+
+Columns:
+- destination, username, stars, original_text
+- analysis_status
+- aspects_detected, aspect_sentiments, num_aspects
+- overall_sentiment
+- cleanliness_sentiment, cleanliness_evidence
+- facilities_sentiment, facilities_evidence
+- price_sentiment, price_evidence
+- service_sentiment, service_evidence
+- accessibility_sentiment, accessibility_evidence
+- scenery_sentiment, scenery_evidence
+- atmosphere_sentiment, atmosphere_evidence
+- food_sentiment, food_evidence
+- safety_sentiment, safety_evidence
+- crowd_sentiment, crowd_evidence
+- photo_spot_sentiment, photo_spot_evidence
+- historical_value_sentiment, historical_value_evidence
+
+6.2 absa_llm_summary.csv
+------------------------
+Aggregated statistics by aspect.
+
+Columns:
+- aspect: Aspect key (e.g., "scenery")
+- aspect_name: English name (e.g., "Scenery/View")
+- aspect_name_id: Indonesian name (e.g., "Pemandangan")
+- total_mentions: Number of times aspect was detected
+- positive: Count of positive sentiments
+- negative: Count of negative sentiments
+- neutral: Count of neutral sentiments
+- positive_pct: Percentage positive (e.g., "95.6%")
+- negative_pct: Percentage negative (e.g., "3.4%")
+- neutral_pct: Percentage neutral (e.g., "1.0%")
+- sentiment_score: (positive - negative) / total, range [-1.0, +1.0]
+
+6.3 absa_llm_by_destination.csv
+-------------------------------
+Sentiment breakdown by destination and aspect.
+
+Columns:
+- destination: Tourism destination name
+- aspect: Aspect key
+- aspect_name: English name
+- total: Total mentions for this destination-aspect pair
+- positive: Positive count
+- negative: Negative count
+- neutral: Neutral count
+- sentiment_score: Calculated sentiment score
+
+================================================================================
+7. SENTIMENT SCORE CALCULATION
+================================================================================
+
+Formula:
+--------
+sentiment_score = (positive_count - negative_count) / total_mentions
+
+Interpretation:
+---------------
++1.0  = All mentions are positive
+ 0.0  = Equal positive and negative, or all neutral
+-1.0  = All mentions are negative
+
+Score Ranges:
+-------------
++0.7 to +1.0  : Excellent (strong positive sentiment)
++0.3 to +0.7  : Good (moderate positive sentiment)
+ 0.0 to +0.3  : Mixed (slight positive or balanced)
+-0.3 to  0.0  : Concerning (slight negative)
+-1.0 to -0.3  : Poor (strong negative sentiment)
+
+================================================================================
+8. RESULTS SUMMARY
+================================================================================
+
+Processing Statistics:
+----------------------
+- Total reviews analyzed: 1,530
+- Successfully processed: 1,530
+- Failed: 0
+- Total aspect mentions: 4,926
+- Average aspects per review: 3.2
+- API calls made: 153 (batches of 10)
+- Processing time: ~8 minutes
+
+Overall Sentiment Distribution:
+-------------------------------
+- Positive: 81.9% (4,032 mentions)
+- Negative: 14.2% (698 mentions)
+- Neutral: 4.0% (196 mentions)
+
+Aspect Results (Sorted by Mentions):
+------------------------------------
++----------------------+----------+--------+--------+--------+---------+
+| Aspect               | Mentions | Pos%   | Neg%   | Neu%   | Score   |
++----------------------+----------+--------+--------+--------+---------+
+| Scenery/View         | 1,188    | 95.6%  | 3.4%   | 1.0%   | +0.923  |
+| Facilities           | 805      | 89.2%  | 7.5%   | 3.4%   | +0.817  |
+| Price/Value          | 719      | 81.6%  | 13.5%  | 4.9%   | +0.682  |
+| Accessibility        | 357      | 49.9%  | 44.0%  | 6.2%   | +0.059  |
+| Crowd Level          | 302      | 48.0%  | 43.7%  | 8.3%   | +0.043  |
+| Atmosphere           | 293      | 94.9%  | 4.4%   | 0.7%   | +0.904  |
+| Service              | 283      | 80.2%  | 18.7%  | 1.1%   | +0.615  |
+| Food & Beverage      | 278      | 83.8%  | 9.4%   | 6.8%   | +0.745  |
+| Historical Value     | 231      | 90.5%  | 4.8%   | 4.8%   | +0.857  |
+| Cleanliness          | 212      | 65.6%  | 24.1%  | 10.4%  | +0.415  |
+| Safety               | 129      | 51.9%  | 41.9%  | 6.2%   | +0.101  |
+| Photo Spots          | 129      | 89.1%  | 3.1%   | 7.8%   | +0.860  |
++----------------------+----------+--------+--------+--------+---------+
+
+================================================================================
+9. USAGE INSTRUCTIONS
+================================================================================
+
+Basic Usage:
+------------
+cd /path/to/project
+export GROQ_API_KEY="your-api-key"
+python src/sentiment_analysis/absa_llm_groq.py
+
+With API Key Argument:
+----------------------
+python src/sentiment_analysis/absa_llm_groq.py --api-key YOUR_API_KEY
+
+Test with Sample:
+-----------------
+python src/sentiment_analysis/absa_llm_groq.py --sample 50
+
+Use Different Model:
+--------------------
+python src/sentiment_analysis/absa_llm_groq.py --model llama-3.1-70b-versatile
+
+Command Line Arguments:
+-----------------------
+--api-key   : Groq API key (alternative to environment variable)
+--sample    : Number of reviews to sample for testing
+--model     : Model to use (default: llama-3.1-8b-instant)
+              Options: llama-3.1-8b-instant, llama-3.1-70b-versatile,
+                       mixtral-8x7b-32768, gemma2-9b-it
+
+================================================================================
+10. TECHNICAL REQUIREMENTS
+================================================================================
+
+Python Version: 3.8+
+
+Dependencies:
+-------------
+groq          # Groq API client
+pandas        # Data manipulation
+numpy         # Numerical operations
+tqdm          # Progress bar
+argparse      # Command line arguments (standard library)
+json          # JSON parsing (standard library)
+re            # Regular expressions (standard library)
+pathlib       # Path operations (standard library)
+
+Installation:
+-------------
+pip install groq pandas numpy tqdm
+
+================================================================================
+11. LIMITATIONS AND CONSIDERATIONS
+================================================================================
+
+API Limitations:
+----------------
+- Free tier: 30 requests/minute, 14,400 requests/day
+- Token limits per request
+- Internet connection required
+
+Model Limitations:
+------------------
+- May miss sarcasm or highly implicit sentiment
+- Context window limits (text truncated to 800 chars)
+- Occasional JSON formatting errors in response
+
+Data Considerations:
+--------------------
+- Reviews in languages other than Indonesian may be misclassified
+- Very short reviews may lack sufficient context
+- Emojis are not explicitly handled
+
+Mitigation Strategies:
+----------------------
+- Retry logic for API errors
+- Multiple JSON parsing strategies
+- Rate limiting to avoid API throttling
+- Batch processing to reduce API calls
+
+================================================================================
+12. COMPARISON WITH OTHER APPROACHES
+================================================================================
+
+The LLM-based approach was compared with traditional methods:
+
++------------------+----------+------------+----------+
+| Approach         | Scenery  | Price      | Overall  |
++------------------+----------+------------+----------+
+| Zero-Shot        | -0.497   | -0.379     | Negative |
+| IndoBERTweet     | -0.815   | -0.634     | Negative |
+| LLM (Groq)       | +0.923   | +0.682     | Positive |
++------------------+----------+------------+----------+
+
+Key Advantages of LLM Approach:
+-------------------------------
+1. Domain Adaptation: Few-shot examples teach tourism-specific patterns
+2. Slang Handling: Explicit mappings for Indonesian informal language
+3. Multi-Aspect: Detects multiple aspects per review (avg 3.2)
+4. Evidence: Provides justification for each sentiment
+5. Accuracy: Results align with actual star ratings (4.7/5 average)
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

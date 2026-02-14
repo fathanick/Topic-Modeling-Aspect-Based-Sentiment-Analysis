@@ -1,0 +1,355 @@
+================================================================================
+ASPECT-BASED SENTIMENT ANALYSIS (ABSA) DOCUMENTATION
+Zero-Shot Learning Analysis of Yogyakarta Tourism Reviews
+================================================================================
+
+Generated: 2026-02-02 15:07:11
+Input File: yogyakarta_tourism_reviews_preprocessed.csv
+Output Files:
+    - absa_results.csv (detailed review-level results)
+    - absa_summary.csv (aspect-level summary)
+    - absa_by_destination.csv (destination-level analysis)
+
+================================================================================
+1. METHODOLOGY
+================================================================================
+
+Aspect-Based Sentiment Analysis (ABSA) Overview:
+------------------------------------------------
+ABSA is a fine-grained sentiment analysis technique that identifies specific
+aspects (features) mentioned in text and determines the sentiment expressed
+toward each aspect separately.
+
+Zero-Shot Learning Approach:
+----------------------------
+This analysis uses zero-shot classification with pre-trained transformer models,
+allowing sentiment classification without task-specific training data.
+
+Pipeline Steps:
+1. Aspect Detection: Identify which aspects are mentioned in each review
+   - Primary: Keyword matching for fast detection
+   - Secondary: Zero-shot classification for unlabeled aspects
+
+2. Sentiment Classification: For each detected aspect, classify sentiment
+   - Uses zero-shot classification with sentiment hypothesis templates
+   - Labels: positive, negative, neutral
+
+Model Configuration:
+--------------------
+- Zero-Shot Model: joeddav/xlm-roberta-large-xnli
+- Aspect Detection Threshold: 0.3
+- Sentiment Labels: positive, negative, neutral
+
+================================================================================
+2. ASPECT DEFINITIONS
+================================================================================
+
+The following aspects were analyzed for tourism destination reviews:
+
+
+Cleanliness (Kebersihan):
+----------------------------------------
+- Key: cleanliness
+- Keywords: bersih, kotor, sampah, jorok, rapi, terawat, kumuh
+- Detection Labels: kebersihan, cleanliness, bersih kotor, hygiene
+
+
+Facilities (Fasilitas):
+----------------------------------------
+- Key: facilities
+- Keywords: toilet, parkir, mushola, kamar mandi, tempat duduk, gazebo
+- Detection Labels: fasilitas, facilities, sarana prasarana, amenities
+
+
+Price/Value (Harga):
+----------------------------------------
+- Key: price
+- Keywords: harga, murah, mahal, tiket, bayar, gratis, worth it, terjangkau
+- Detection Labels: harga, price, biaya, value for money, tiket masuk
+
+
+Service (Pelayanan):
+----------------------------------------
+- Key: service
+- Keywords: pelayanan, ramah, petugas, guide, staff, helpful
+- Detection Labels: pelayanan, service, layanan, staff service
+
+
+Accessibility (Aksesibilitas):
+----------------------------------------
+- Key: accessibility
+- Keywords: akses, jalan, parkir, jauh, dekat, mudah dijangkau, transportasi
+- Detection Labels: aksesibilitas, accessibility, akses jalan, kemudahan akses
+
+
+Scenery/View (Pemandangan):
+----------------------------------------
+- Key: scenery
+- Keywords: pemandangan, view, indah, cantik, bagus, sunset, sunrise
+- Detection Labels: pemandangan, scenery, view, keindahan alam
+
+
+Atmosphere (Suasana):
+----------------------------------------
+- Key: atmosphere
+- Keywords: suasana, nyaman, tenang, ramai, sepi, adem, sejuk
+- Detection Labels: suasana, atmosphere, ambiance, kenyamanan
+
+
+Food & Beverage (Makanan):
+----------------------------------------
+- Key: food
+- Keywords: makanan, minuman, makan, kuliner, warung, resto, enak, seafood
+- Detection Labels: makanan minuman, food and beverage, kuliner, food quality
+
+
+Safety (Keamanan):
+----------------------------------------
+- Key: safety
+- Keywords: aman, bahaya, hati-hati, waspada, ombak, licin, curam
+- Detection Labels: keamanan, safety, keselamatan, security
+
+
+Crowd Level (Keramaian):
+----------------------------------------
+- Key: crowd
+- Keywords: ramai, sepi, penuh, antri, crowded, pengunjung
+- Detection Labels: keramaian, crowd level, tingkat keramaian, jumlah pengunjung
+
+
+Photo Spots (Spot Foto):
+----------------------------------------
+- Key: photo_spot
+- Keywords: foto, selfie, instagramable, spot, background, estetik
+- Detection Labels: spot foto, photo spots, tempat foto, instagramable
+
+
+Historical/Cultural Value (Nilai Sejarah):
+----------------------------------------
+- Key: historical_value
+- Keywords: sejarah, budaya, candi, heritage, kuno, bersejarah, museum
+- Detection Labels: nilai sejarah, historical value, budaya, cultural significance
+
+
+================================================================================
+3. RESULTS SUMMARY
+================================================================================
+
+Dataset Statistics:
+-------------------
+- Total reviews analyzed: 300
+- Reviews processed: 300
+- Processing time: 675.72 seconds
+- Average time per review: 2.252 seconds
+
+Aspect Detection Summary:
+-------------------------
+
+Accessibility (accessibility):
+- Total mentions: 164
+- Positive: 38 (23.2%)
+- Negative: 124 (75.6%)
+- Neutral: 2 (1.2%)
+- Sentiment Score: -0.524 (range: -1 to +1)
+
+Scenery/View (scenery):
+- Total mentions: 163
+- Positive: 37 (22.7%)
+- Negative: 118 (72.4%)
+- Neutral: 8 (4.9%)
+- Sentiment Score: -0.497 (range: -1 to +1)
+
+Food & Beverage (food):
+- Total mentions: 127
+- Positive: 34 (26.8%)
+- Negative: 92 (72.4%)
+- Neutral: 1 (0.8%)
+- Sentiment Score: -0.457 (range: -1 to +1)
+
+Atmosphere (atmosphere):
+- Total mentions: 123
+- Positive: 25 (20.3%)
+- Negative: 95 (77.2%)
+- Neutral: 3 (2.4%)
+- Sentiment Score: -0.569 (range: -1 to +1)
+
+Safety (safety):
+- Total mentions: 122
+- Positive: 28 (23.0%)
+- Negative: 90 (73.8%)
+- Neutral: 4 (3.3%)
+- Sentiment Score: -0.508 (range: -1 to +1)
+
+Price/Value (price):
+- Total mentions: 116
+- Positive: 34 (29.3%)
+- Negative: 78 (67.2%)
+- Neutral: 4 (3.4%)
+- Sentiment Score: -0.379 (range: -1 to +1)
+
+Facilities (facilities):
+- Total mentions: 112
+- Positive: 21 (18.8%)
+- Negative: 91 (81.2%)
+- Neutral: 0 (0.0%)
+- Sentiment Score: -0.625 (range: -1 to +1)
+
+Cleanliness (cleanliness):
+- Total mentions: 98
+- Positive: 26 (26.5%)
+- Negative: 67 (68.4%)
+- Neutral: 5 (5.1%)
+- Sentiment Score: -0.418 (range: -1 to +1)
+
+Photo Spots (photo_spot):
+- Total mentions: 87
+- Positive: 28 (32.2%)
+- Negative: 56 (64.4%)
+- Neutral: 3 (3.4%)
+- Sentiment Score: -0.322 (range: -1 to +1)
+
+Crowd Level (crowd):
+- Total mentions: 86
+- Positive: 16 (18.6%)
+- Negative: 70 (81.4%)
+- Neutral: 0 (0.0%)
+- Sentiment Score: -0.628 (range: -1 to +1)
+
+Service (service):
+- Total mentions: 46
+- Positive: 13 (28.3%)
+- Negative: 31 (67.4%)
+- Neutral: 2 (4.3%)
+- Sentiment Score: -0.391 (range: -1 to +1)
+
+Historical/Cultural Value (historical_value):
+- Total mentions: 45
+- Positive: 15 (33.3%)
+- Negative: 28 (62.2%)
+- Neutral: 2 (4.4%)
+- Sentiment Score: -0.289 (range: -1 to +1)
+
+
+================================================================================
+4. SENTIMENT DISTRIBUTION BY ASPECT
+================================================================================
+
+Overall Sentiment Patterns:
+---------------------------
+
+Most Mentioned Aspects:
+  - Accessibility: 164 mentions
+  - Scenery/View: 163 mentions
+  - Food & Beverage: 127 mentions
+
+Most Positive Aspects (by sentiment score):
+  - Historical/Cultural Value: -0.289 score (33.3% positive)
+  - Photo Spots: -0.322 score (32.2% positive)
+  - Price/Value: -0.379 score (29.3% positive)
+
+Areas Needing Improvement (lowest sentiment scores):
+  - Crowd Level: -0.628 score (81.4% negative)
+  - Facilities: -0.625 score (81.2% negative)
+  - Atmosphere: -0.569 score (77.2% negative)
+
+
+================================================================================
+5. DESTINATION-LEVEL INSIGHTS
+================================================================================
+
+Top Destinations by Aspect Performance:
+---------------------------------------
+
+Cleanliness - Top Performing Destinations:
+  - Alun-alun Kidul: 1.0 score (1 mentions)
+  - Candi Kalasan: 1.0 score (1 mentions)
+  - Pantai Gesing: 1.0 score (2 mentions)
+
+Facilities - Top Performing Destinations:
+  - Alun-alun Kidul: 1.0 score (1 mentions)
+  - Pantai Gesing: 0.5 score (4 mentions)
+  - Candi Kalasan: 0.0 score (2 mentions)
+
+Price/Value - Top Performing Destinations:
+  - Pantai Gesing: 1.0 score (4 mentions)
+  - Pantai Kesirat: 0.5 score (4 mentions)
+  - Museum Ullen Sentalu: 0.25 score (8 mentions)
+
+Service - Top Performing Destinations:
+  - Pantai Gesing: 1.0 score (1 mentions)
+  - Pantai Kesirat: 1.0 score (1 mentions)
+  - Pantai Sundak: 1.0 score (1 mentions)
+
+Accessibility - Top Performing Destinations:
+  - Pantai Gesing: 0.5 score (4 mentions)
+  - Pantai Ngobaran: 0.333 score (3 mentions)
+  - Candi Prambanan: 0.25 score (4 mentions)
+
+
+================================================================================
+6. INTERPRETATION GUIDE
+================================================================================
+
+Understanding Sentiment Scores:
+-------------------------------
+- Sentiment Score = (Positive - Negative) / Total
+- Range: -1.0 (all negative) to +1.0 (all positive)
+- Score > 0.3: Generally positive perception
+- Score -0.3 to 0.3: Mixed or neutral perception
+- Score < -0.3: Generally negative perception
+
+Using the Results:
+------------------
+1. Identify Strengths: Aspects with high positive percentages
+2. Identify Weaknesses: Aspects with high negative percentages
+3. Prioritize Improvements: Focus on frequently mentioned negative aspects
+4. Destination Comparison: Compare aspect performance across destinations
+
+Limitations:
+------------
+1. Zero-shot classification may have lower accuracy than fine-tuned models
+2. Indonesian informal language may affect detection accuracy
+3. Sarcasm and irony may be misclassified
+4. Context-dependent sentiments may not be fully captured
+
+================================================================================
+7. OUTPUT FILE DESCRIPTIONS
+================================================================================
+
+absa_results.csv:
+- Contains review-level aspect sentiment analysis
+- Columns include sentiment and confidence for each aspect
+- Use for detailed review-by-review analysis
+
+absa_summary.csv:
+- Aggregated statistics per aspect
+- Use for overall aspect performance comparison
+
+absa_by_destination.csv:
+- Destination-level breakdown of aspect sentiments
+- Use for comparing destinations on specific aspects
+
+================================================================================
+8. TECHNICAL DETAILS
+================================================================================
+
+Libraries Used:
+- transformers: Hugging Face transformers for zero-shot classification
+- torch: PyTorch backend for model inference
+- pandas: Data manipulation
+- numpy: Numerical operations
+- tqdm: Progress tracking
+
+Model Details:
+- Architecture: XLM-RoBERTa Large (multilingual)
+- Training: Cross-lingual Natural Language Inference (XNLI)
+- Languages: 100+ languages including Indonesian
+
+Performance Notes:
+- CPU inference is slower but works without GPU
+- For faster processing, use GPU (device=0)
+- Batch processing can improve throughput
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

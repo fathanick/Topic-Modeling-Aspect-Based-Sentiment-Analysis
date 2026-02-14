@@ -1,0 +1,200 @@
+================================================================================
+TEXT PREPROCESSING DOCUMENTATION
+Google Reviews - Yogyakarta Tourism Destinations
+================================================================================
+
+Generated: 2026-02-02 14:28:11
+Input File: yogyakarta_tourism_reviews.csv
+Output File: yogyakarta_tourism_reviews_preprocessed.csv
+
+================================================================================
+1. PREPROCESSING STEPS
+================================================================================
+
+Step 1: Load Data
+-----------------
+- Loaded raw reviews from CSV file
+- Original review count: 3,000
+
+Step 2: Remove Duplicate Comments
+---------------------------------
+- Identified and removed duplicate reviews based on exact text match
+- Kept first occurrence of each unique review
+- Duplicates removed: 1,470
+- Reviews after deduplication: 1,530
+
+Step 3: Handle Empty Reviews
+----------------------------
+- Identified reviews with empty or null text content
+- Removed empty reviews from dataset
+- Empty reviews removed: 0
+
+Step 4: Text Cleaning
+---------------------
+- Converted all text to lowercase
+- Removed URLs (http, https, www patterns)
+- Removed email addresses
+- Removed numeric characters
+- Normalized whitespace
+
+Step 5: Remove Punctuation
+--------------------------
+- Removed all punctuation marks and special characters
+- Preserved alphanumeric characters and spaces
+- Removed emojis and symbols
+- Punctuation pattern used: [^\w\s]
+
+Step 6: Remove Stop Words
+-------------------------
+- Applied bilingual stop word removal (Indonesian + English)
+- Indonesian stop words: 255 words
+- English stop words (NLTK): 198 words
+- Total unique stop words: 453 words
+
+Indonesian Stop Words Categories:
+- Common words (yang, dan, di, ke, dari, ini, itu, etc.)
+- Prepositions and conjunctions (oleh, tentang, seperti, etc.)
+- Pronouns and determiners (saya, kami, kita, mereka, etc.)
+- Adverbs (sangat, amat, sekali, paling, etc.)
+- Auxiliary verbs (dapat, bisa, harus, perlu, etc.)
+- Question words (apa, siapa, mana, kapan, etc.)
+- Informal/slang words (yg, dgn, utk, gak, bgt, etc.)
+- Time-related words (hari, minggu, bulan, etc.)
+- Place-related words (sini, situ, tempat, etc.)
+
+Step 7: Finalize Output
+-----------------------
+- Ensured each review remains in a single row
+- Replaced newline characters with spaces
+- Removed reviews that became empty after preprocessing
+
+================================================================================
+2. STATISTICS SUMMARY
+================================================================================
+
+Data Statistics:
+- Original reviews:              3,000
+- Duplicates removed:            1,470
+- Empty reviews removed:         0
+- Final review count:            1,530
+- Reduction rate:                49.00%
+
+Word Statistics:
+- Total words before cleaning:   85,208
+- Total words after cleaning:    53,278
+- Words removed:                 31,930
+- Word reduction rate:           37.47%
+
+================================================================================
+3. OUTPUT FILE STRUCTURE
+================================================================================
+
+The output CSV file contains the following columns:
+
+| Column          | Description                                      |
+|-----------------|--------------------------------------------------|
+| destination     | Name of the tourism destination                  |
+| user_url        | URL to reviewer's Google profile                 |
+| username        | Reviewer's display name                          |
+| stars           | Rating given (1-5 stars)                         |
+| time            | Time of review (relative, e.g., "2 weeks ago")   |
+| original_text   | Original review text (single row, spaces only)   |
+| cleaned_text    | Preprocessed text (lowercase, no stopwords/punct)|
+
+================================================================================
+4. DESTINATION BREAKDOWN
+================================================================================
+
+Reviews per destination after preprocessing:
+
+Candi Prambanan: 50 reviews
+Candi Kalasan: 50 reviews
+Studio Alam Gamplong: 50 reviews
+Pantai Wediombo: 50 reviews
+Sendang Sono: 50 reviews
+Situs Warungboto: 50 reviews
+Makam Raja-Raja Imogiri: 50 reviews
+Pantai Sadeng: 50 reviews
+Pantai Kesirat: 50 reviews
+Pantai Baru: 50 reviews
+Gumuk Pasir Parangkusumo: 50 reviews
+Pantai Sundak: 50 reviews
+Pantai Sadranan: 50 reviews
+Bukit Bintang: 50 reviews
+Malioboro: 50 reviews
+Pantai Nglambor: 50 reviews
+Pantai Depok: 50 reviews
+Pantai Baron: 50 reviews
+Tugu Jogja: 50 reviews
+Pantai Drini: 50 reviews
+Pantai Parangtritis: 50 reviews
+Pantai Slili: 50 reviews
+Pantai Ngobaran: 50 reviews
+Pantai Indrayanti: 50 reviews
+Pantai Kukup: 50 reviews
+Agrowisata Bhumi Merapi: 50 reviews
+Pantai Gesing: 50 reviews
+Prawirotaman: 50 reviews
+Museum Ullen Sentalu: 50 reviews
+Pantai Pok Tunggal: 40 reviews
+Pantai Krakal: 10 reviews
+Candi Mendut: 10 reviews
+Candi Borobudur: 10 reviews
+Alun-alun Kidul: 10 reviews
+
+================================================================================
+5. RATING DISTRIBUTION
+================================================================================
+
+* (1 stars): 29 reviews
+** (2 stars): 14 reviews
+*** (3 stars): 45 reviews
+**** (4 stars): 239 reviews
+***** (5 stars): 1,203 reviews
+
+================================================================================
+6. SAMPLE PREPROCESSED REVIEWS
+================================================================================
+
+Destination: Candi Prambanan
+Rating: 5 stars
+Original: Saya berkunjung ke Candi Prambanan dan jujur tempat ini bikin kagum. Begitu masuk area candi, langsung terasa megahnya bangunan bangunan candi yang berdiri tinggi dan kokoh. Suasananya tenang, luas, d...
+Cleaned:  berkunjung candi prambanan jujur bikin kagum masuk area candi langsung terasa megahnya bangunan bangunan candi berdiri tinggi kokoh suasananya tenang luas bikin pelan pelan jalan menikmati sudutnya ar...
+------------------------------------------------------------
+Destination: Candi Prambanan
+Rating: 5 stars
+Original: Candi Prambanan emang nggak pernah gagal bikin kagum. Begitu masuk area, langsung disambut view candi yang megah dan super estetik — cocok banget buat foto-foto, konten IG, atau sekadar jalan santai n...
+Cleaned:  candi prambanan gagal bikin kagum masuk area langsung disambut view candi megah super estetik cocok buat foto foto konten ig sekadar jalan santai nikmatin suasana areanya luas bersih tertata rapi nyam...
+------------------------------------------------------------
+Destination: Candi Prambanan
+Rating: 5 stars
+Original: Slah 2 tmpat bersejarah d jogja. Berlibur smbil belajar wkwk. Untuk tiket bisa online/ots, dan ada bberapa kategori. Dianjurkan untuk bawa minum yaa krna kliling candi itu capee. Ada bberapa tempat, a...
+Cleaned:  slah tmpat bersejarah jogja berlibur smbil belajar tiket online ots bberapa kategori dianjurkan bawa minum krna kliling candi capee bberapa minizoo...
+------------------------------------------------------------
+Destination: Candi Prambanan
+Rating: 3 stars
+Original: Day 3 to Yogyakarta (18 Okt 25): Yeay, akhir dari perjalanan di Yogyakarta. Tepat nya di Sabtu pagi, abis sarapan Nasi Rames Bang Udin yang Deket dengan Halte Trans Jogja Mangkubumi 1. Sekalian naik T...
+Cleaned:  day yogyakarta okt akhir perjalanan yogyakarta tepat sabtu abis sarapan nasi rames bang udin deket halte trans jogja mangkubumi sekalian naik trans jogja candi prambanan perjalanan kayanya berenti hal...
+------------------------------------------------------------
+Destination: Candi Prambanan
+Rating: 5 stars
+Original: Di week day pengunjung tidak terlalu ramai. Namun mungkin jg akan banyak kunjungan dari siswa/murid-murid yang melakukan study tour. Agar lebih mudah untuk memahami sejarah dan nilai2 yang terkandung ...
+Cleaned:  week day pengunjung ramai mungkin kunjungan siswa murid murid melakukan study tour mudah memahami sejarah nilai terkandung bangunan candi disarankan menggunakan tour guide resmi terdapat area entrance...
+------------------------------------------------------------
+
+================================================================================
+7. TECHNICAL DETAILS
+================================================================================
+
+Libraries Used:
+- pandas: Data manipulation and CSV handling
+- re: Regular expressions for text cleaning
+- string: String operations
+- nltk: Natural Language Toolkit for English stop words
+
+Code File: preprocessing.py
+Python Version: 3.x
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
