@@ -90,6 +90,71 @@ The dataset includes diverse tourism categories:
 | time | Review timestamp (relative) |
 | text | Review content |
 
+### 2.5 Scraping Process Technical Details
+
+The data collection pipeline consists of two specialized scrapers:
+
+#### 2.5.1 Destinations Scraper (`destinations_scraper.py`)
+
+| Component | Description |
+|-----------|-------------|
+| **Purpose** | Scrape list of tourism destinations from yogyes.com |
+| **Source URL** | https://www.yogyes.com/id/yogyakarta-tourism-object/ |
+| **Method** | HTTP request + BeautifulSoup HTML parsing |
+| **Extraction** | Regex pattern matching on `<h2>` tags |
+| **Output** | `destinations.csv` with name and Google Maps search queries |
+
+**Process Flow:**
+1. Fetch webpage content using `requests` library
+2. Parse HTML with BeautifulSoup (`html.parser`)
+3. Extract numbered destination names from `<h2>` tags using regex: `r'^\d+\.\s*(.+)$'`
+4. Generate Google Maps search queries by appending "Yogyakarta"
+5. Export to CSV file
+
+#### 2.5.2 Google Reviews Scraper (`google_reviews_scraper.py`)
+
+| Component | Description |
+|-----------|-------------|
+| **Purpose** | Scrape Google Maps reviews for each destination |
+| **Technology** | Playwright async browser automation |
+| **Browser** | Chromium with anti-detection measures |
+| **Max Reviews** | 100 per destination |
+| **Output** | `yogyakarta_tourism_reviews.csv` |
+
+**Browser Configuration:**
+- Viewport: 1280 x 800 pixels
+- Locale: en-US
+- User-Agent: Chrome 120 on macOS
+- Anti-detection: `--disable-blink-features=AutomationControlled`
+
+**Scraping Workflow:**
+1. **Consent Handling** - Detect and click Google consent popup (supports EN/ID)
+2. **Search Navigation** - Open Google Maps → Enter search query → Navigate to Reviews tab
+3. **Scroll Loading** - Auto-scroll reviews panel to load more (lazy loading)
+4. **Data Extraction** - Extract username, stars, time, and review text
+5. **Text Expansion** - Click "More" button to get full review content
+6. **Save Results** - Intermediate saves every 5 destinations
+
+**Review Element Selectors:**
+| Element | Selector(s) |
+|---------|------------|
+| Username | `button[data-href*='/contrib/']`, `.d4r55` |
+| Stars | `[aria-label*='star']`, `span.kvMYJc` |
+| Time | `.rsqaWe` |
+| Text | `span.wiI7pd`, `div[tabindex='-1'][lang]` |
+| Expand | `button:has-text('Lainnya')`, `.w8nwRe.kyuRq` |
+
+**Error Handling:**
+- Multiple fallback selectors for each element
+- Graceful handling of missing data
+- Intermediate saves to prevent data loss
+- Rate limiting with random delays (2-5 seconds)
+
+### 2.6 Scraping Documentation
+
+For detailed technical documentation on the scraping process, see:
+- `docs/scraping_documentation.txt`
+
 ---
 
 ## 3. Data Preprocessing
@@ -417,6 +482,7 @@ Topic-Modeling-Aspect-Based-Sentiment-Analysis/
 │       ├── topic_visualization_hierarchy.html
 │       └── topic_visualization_intertopic_distance.html
 ├── docs/
+│   ├── scraping_documentation.txt
 │   ├── preprocessing_documentation.txt
 │   ├── topic_modeling_documentation.txt
 │   ├── absa_llm_groq_documentation.txt

@@ -1,0 +1,394 @@
+================================================================================
+SCRAPING DOCUMENTATION
+Yogyakarta Tourism Reviews Data Collection
+================================================================================
+
+Project: Topic Modeling and Aspect-Based Sentiment Analysis
+Date: February 2026
+Author: Automated Analysis Pipeline
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+
+1. Overview
+2. Destinations Scraper (destinations_scraper.py)
+3. Google Reviews Scraper (google_reviews_scraper.py)
+4. Data Output Specifications
+5. Configuration Parameters
+6. Usage Instructions
+7. Error Handling & Troubleshooting
+8. Technical Dependencies
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+This documentation covers the web scraping pipeline used to collect Google
+Maps reviews for Yogyakarta tourism destinations. The scraping process consists
+of two main scripts:
+
+1. destinations_scraper.py - Collects the list of tourism destinations
+2. google_reviews_scraper.py - Scrapes Google Maps reviews for each destination
+
+The pipeline collected approximately 3,000 reviews from 60 tourism destinations
+in Yogyakarta, Indonesia.
+
+================================================================================
+2. DESTINATIONS SCRAPER (destinations_scraper.py)
+================================================================================
+
+2.1 Purpose
+-----------
+Scrapes the list of Yogyakarta tourism destinations from yogyes.com and
+generates Google Maps search queries for each destination.
+
+2.2 Data Source
+---------------
+URL: https://www.yogyes.com/id/yogyakarta-tourism-object/
+
+This website provides a comprehensive list of tourism objects in Yogyakarta
+organized with numbered headings (e.g., "1. Candi Prambanan", "2. Malioboro").
+
+2.3 Methodology
+---------------
+The scraper uses the following approach:
+
+Step 1: HTTP Request
+   - Fetches the webpage content using the requests library
+   - Timeout: 30 seconds
+   - Handles HTTP errors gracefully
+
+Step 2: HTML Parsing
+   - Uses BeautifulSoup (html.parser) to parse the HTML content
+   - Searches for all <h2> tags containing destination names
+
+Step 3: Regex Extraction
+   - Pattern: r'^\d+\.\s*(.+)$'
+   - Matches numbered list items (e.g., "1. Candi Prambanan")
+   - Extracts the destination name (e.g., "Candi Prambanan")
+
+Step 4: Search Query Generation
+   - Appends " Yogyakarta" to each destination name
+   - Creates Google Maps-friendly search queries
+   - Example: "Candi Prambanan" -> "Candi Prambanan Yogyakarta"
+
+Step 5: CSV Export
+   - Saves destinations to destinations.csv
+   - Fields: name, search_query
+
+2.4 Output File Structure
+-------------------------
+File: destinations.csv
+
+| Column       | Description                                    |
+|--------------|------------------------------------------------|
+| name         | Original destination name                      |
+| search_query | Google Maps search query (name + "Yogyakarta") |
+
+2.5 Sample Output
+-----------------
+name,search_query
+Candi Prambanan,Candi Prambanan Yogyakarta
+Malioboro,Malioboro Yogyakarta
+Pantai Parangtritis,Pantai Parangtritis Yogyakarta
+...
+
+2.6 Dependencies
+----------------
+- requests: HTTP library for fetching web pages
+- beautifulsoup4: HTML parsing library
+- pandas: Data manipulation and CSV export
+- re: Regular expression matching (standard library)
+
+================================================================================
+3. GOOGLE REVIEWS SCRAPER (google_reviews_scraper.py)
+================================================================================
+
+3.1 Purpose
+-----------
+Scrapes Google Maps reviews for each tourism destination using browser
+automation. Collects up to 100 reviews per destination.
+
+3.2 Technology Stack
+--------------------
+- Playwright: Async browser automation framework
+- Chromium: Headless/headed browser engine
+- AsyncIO: Asynchronous I/O for efficient scraping
+
+3.3 Configuration Parameters
+----------------------------
+| Parameter                    | Value         | Description                    |
+|------------------------------|---------------|--------------------------------|
+| MAX_REVIEWS_PER_DESTINATION  | 100           | Max reviews to collect         |
+| DESTINATIONS_FILE            | destinations.csv | Input file with destinations |
+| OUTPUT_FILE                  | yogyakarta_tourism_reviews.csv | Output file  |
+| HEADLESS                     | False         | Browser visibility mode        |
+| SCROLL_PAUSE_TIME            | 1.5 seconds   | Wait time between scrolls      |
+| REQUEST_DELAY                | (2, 5) sec    | Random delay between requests  |
+| DEFAULT_TIMEOUT              | 15000 ms      | Page load timeout              |
+
+3.4 Browser Configuration
+-------------------------
+- Browser: Chromium
+- Anti-detection: --disable-blink-features=AutomationControlled
+- Viewport: 1280 x 800 pixels
+- Locale: en-US
+- User-Agent: Chrome 120 on macOS
+
+3.5 Scraping Workflow
+---------------------
+
+Step 1: Handle Google Consent
+   - Detects and clicks consent popup if present
+   - Supports multiple languages (English, Indonesian)
+   - Consent button selectors tried:
+     * "Accept all"
+     * "Terima semua" (Indonesian)
+     * "I agree"
+     * Various aria-label patterns
+
+Step 2: Search and Navigate
+   - Opens Google Maps (https://www.google.com/maps)
+   - Locates search box using multiple selectors
+   - Enters search query (destination + "Yogyakarta")
+   - Waits for search results to load
+   - Clicks on first result if multiple matches
+   - Navigates to Reviews tab
+
+Step 3: Scroll Reviews Panel
+   - Identifies the scrollable reviews container
+   - Scrolls to load more reviews (lazy loading)
+   - Maximum 20 scroll attempts
+   - Stops when:
+     * Target review count reached (100)
+     * No new reviews loaded after 3 attempts
+
+Step 4: Extract Review Data
+   For each review element, extracts:
+   - Username: From profile button or .d4r55 element
+   - User URL: Profile link from data-href attribute
+   - Star Rating: From aria-label containing "star"
+   - Review Time: Relative timestamp (e.g., "2 months ago")
+   - Review Text: Full review content (expands "More" button if present)
+
+Step 5: Save Results
+   - Saves to CSV file
+   - Intermediate saves every 5 destinations
+   - Final save upon completion
+
+3.6 Review Extraction Selectors
+-------------------------------
+The scraper uses multiple fallback selectors for reliability:
+
+User Information:
+- button[data-href*='/contrib/']
+- .d4r55 (username class)
+
+Star Rating:
+- [aria-label*='star']
+- span.kvMYJc
+
+Review Time:
+- .rsqaWe
+
+Review Text:
+- span.wiI7pd
+- div[tabindex='-1'][lang]
+- .MyEned span
+
+"More" Button (to expand full text):
+- button[aria-label='See more']
+- button:has-text('Lainnya')
+- .w8nwRe.kyuRq
+
+3.7 Output File Structure
+-------------------------
+File: yogyakarta_tourism_reviews.csv
+
+| Column      | Type    | Description                              |
+|-------------|---------|------------------------------------------|
+| destination | string  | Name of the tourism destination          |
+| user_url    | string  | URL to reviewer's Google Maps profile    |
+| username    | string  | Reviewer's display name                  |
+| stars       | integer | Rating (1-5 stars)                       |
+| time        | string  | Relative timestamp of review             |
+| text        | string  | Full review text content                 |
+
+3.8 Sample Output
+-----------------
+destination,user_url,username,stars,time,text
+Candi Prambanan,https://...,John Doe,5,2 months ago,"Beautiful temple..."
+Malioboro,https://...,Jane Smith,4,1 week ago,"Very crowded but..."
+
+3.9 Test Mode
+-------------
+Run with single destination for testing:
+   python google_reviews_scraper.py --test-single
+
+Test configuration:
+- Destination: Candi Prambanan
+- Max reviews: 10
+- Output: test_reviews.csv
+
+================================================================================
+4. DATA OUTPUT SPECIFICATIONS
+================================================================================
+
+4.1 Final Data Statistics
+-------------------------
+| Metric                    | Value          |
+|---------------------------|----------------|
+| Total Destinations        | 60             |
+| Total Reviews Collected   | ~3,000         |
+| Average Reviews/Destination| ~50           |
+| Output Format             | CSV (UTF-8)    |
+
+4.2 Destination Categories Covered
+----------------------------------
+- Beaches: Pantai Parangtritis, Pantai Indrayanti, Pantai Baron, etc.
+- Temples: Candi Prambanan, Candi Borobudur, Candi Kalasan, etc.
+- Cultural Sites: Malioboro, Tugu Jogja, Alun-alun Kidul, etc.
+- Museums: Museum Ullen Sentalu
+- Nature: Gumuk Pasir Parangkusumo, Bukit Bintang
+- Historical: Makam Raja-Raja Imogiri, Situs Warungboto
+- Religious: Sendang Sono
+- Agrotourism: Agrowisata Bhumi Merapi
+
+4.3 Data Quality Notes
+----------------------
+- Reviews are collected in their original language (mostly Indonesian)
+- Empty or null reviews are included (handled in preprocessing)
+- Duplicate reviews may exist (deduplicated in preprocessing)
+- Star ratings may be null if extraction failed
+
+================================================================================
+5. CONFIGURATION PARAMETERS
+================================================================================
+
+5.1 Destinations Scraper
+------------------------
+URL = "https://www.yogyes.com/id/yogyakarta-tourism-object/"
+OUTPUT_FILE = "destinations.csv"
+Request Timeout = 30 seconds
+
+5.2 Google Reviews Scraper
+--------------------------
+MAX_REVIEWS_PER_DESTINATION = 100
+DESTINATIONS_FILE = "destinations.csv"
+OUTPUT_FILE = "yogyakarta_tourism_reviews.csv"
+HEADLESS = False (set to True for production)
+SCROLL_PAUSE_TIME = 1.5 seconds
+REQUEST_DELAY = (2, 5) seconds (random)
+DEFAULT_TIMEOUT = 15000 ms
+
+================================================================================
+6. USAGE INSTRUCTIONS
+================================================================================
+
+6.1 Prerequisites
+-----------------
+1. Install Python 3.8+
+2. Install required packages:
+   pip install playwright beautifulsoup4 requests pandas
+3. Install Playwright browsers:
+   playwright install chromium
+
+6.2 Step-by-Step Execution
+--------------------------
+
+Step 1: Scrape Destinations
+   cd src/scraping
+   python destinations_scraper.py
+
+   Output: destinations.csv (60 destinations)
+
+Step 2: Test Single Destination (Optional)
+   python google_reviews_scraper.py --test-single
+
+   Output: test_reviews.csv (10 reviews from Candi Prambanan)
+
+Step 3: Scrape All Reviews
+   python google_reviews_scraper.py
+
+   Output: yogyakarta_tourism_reviews.csv (~3,000 reviews)
+   Estimated time: 2-3 hours (depends on network and rate limiting)
+
+6.3 Production Mode
+-------------------
+For production scraping, modify google_reviews_scraper.py:
+   HEADLESS = True
+
+================================================================================
+7. ERROR HANDLING & TROUBLESHOOTING
+================================================================================
+
+7.1 Common Issues
+-----------------
+
+Issue: "Could not find search box"
+Solution: Google Maps layout may have changed. Update search_selectors.
+
+Issue: "No reviews found"
+Solution:
+- Check if destination exists on Google Maps
+- Verify search query returns valid results
+- Destination may have no reviews
+
+Issue: "Timeout during navigation"
+Solution:
+- Increase DEFAULT_TIMEOUT
+- Check internet connection
+- Google may be rate-limiting requests
+
+Issue: Consent popup not handled
+Solution:
+- Add new consent button selectors
+- Check language-specific button text
+
+7.2 Rate Limiting
+-----------------
+Google may block excessive requests. Mitigation strategies:
+- Random delays between requests (REQUEST_DELAY)
+- Anti-detection browser flags
+- User-agent spoofing
+- Intermediate saves to prevent data loss
+
+7.3 Data Recovery
+-----------------
+If scraping is interrupted:
+- Intermediate saves occur every 5 destinations
+- Check OUTPUT_FILE for partial data
+- Note last successful destination and restart from there
+
+================================================================================
+8. TECHNICAL DEPENDENCIES
+================================================================================
+
+8.1 Python Packages
+-------------------
+| Package         | Version | Purpose                           |
+|-----------------|---------|-----------------------------------|
+| playwright      | Latest  | Browser automation                |
+| beautifulsoup4  | 4.x     | HTML parsing                      |
+| requests        | 2.x     | HTTP requests                     |
+| pandas          | 1.x+    | Data manipulation & CSV I/O       |
+
+8.2 System Requirements
+-----------------------
+- Python 3.8+
+- Chromium browser (installed via Playwright)
+- Internet connection
+- Sufficient disk space for CSV output
+
+8.3 Installation Commands
+-------------------------
+pip install playwright beautifulsoup4 requests pandas
+playwright install chromium
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
+
+Document Version: 1.0
+Last Updated: February 2026
