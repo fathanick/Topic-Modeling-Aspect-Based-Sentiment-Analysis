@@ -1,0 +1,214 @@
+================================================================================
+ASPECT-BASED SENTIMENT ANALYSIS (ABSA) DOCUMENTATION
+LLM-Based Analysis using Google Gemini
+================================================================================
+
+Generated: 2026-02-03 11:49:57
+Model: gemini-2.0-flash
+Input File: data/processed/yogyakarta_tourism_reviews_preprocessed.csv
+
+================================================================================
+1. METHODOLOGY
+================================================================================
+
+LLM-Based ABSA Approach:
+------------------------
+This analysis uses Google Gemini LLM with few-shot prompting to perform
+aspect-based sentiment analysis. Unlike traditional ML models, this approach:
+
+- Understands Indonesian informal language and slang
+- Handles context-dependent sentiment (e.g., "ramai" as crowded vs popular)
+- Provides evidence/reasoning for each classification
+- Detects multiple aspects and sentiments per review
+
+Pipeline Steps:
+---------------
+1. Batch Processing: Reviews are grouped into batches of 5
+2. Few-Shot Prompting: Each batch is analyzed with domain-specific examples
+3. Structured Output: JSON format ensures consistent parsing
+4. Aggregation: Results are aggregated per aspect and destination
+
+Model Configuration:
+--------------------
+- Model: gemini-2.0-flash
+- Temperature: 0.1 (for consistent outputs)
+- Batch Size: 5 reviews per API call
+- Rate Limiting: 4s between requests
+
+================================================================================
+2. RESULTS SUMMARY
+================================================================================
+
+Processing Statistics:
+----------------------
+- Total reviews: 50
+- Successfully processed: 0
+- Failed: 50
+- API calls made: 0
+- Total processing time: 124.40 seconds
+- Avg time per review: 124.401 seconds
+- Total aspect mentions: 0
+- Avg aspects per review: 0.00
+
+Aspect-Level Results:
+---------------------
+
+Cleanliness (cleanliness):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Facilities (facilities):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Price/Value (price):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Service (service):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Accessibility (accessibility):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Scenery/View (scenery):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Atmosphere (atmosphere):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Food & Beverage (food):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Safety (safety):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Crowd Level (crowd):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Photo Spots (photo_spot):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+Historical/Cultural Value (historical_value):
+  - Mentions: 0 (0.0% of reviews)
+  - Positive: 0 (0.0%)
+  - Negative: 0 (0.0%)
+  - Neutral: 0 (0.0%)
+  - Avg Confidence: 0.000
+  - Sentiment Score: +0.000
+
+================================================================================
+3. KEY INSIGHTS
+================================================================================
+
+Most Discussed Aspects:
+-----------------------
+1. Cleanliness: 0 mentions
+2. Facilities: 0 mentions
+3. Price/Value: 0 mentions
+4. Service: 0 mentions
+5. Accessibility: 0 mentions
+
+Highest Rated Aspects (Strengths):
+----------------------------------
+1. Cleanliness: +0.000 (0.0% positive)
+2. Facilities: +0.000 (0.0% positive)
+3. Price/Value: +0.000 (0.0% positive)
+
+Lowest Rated Aspects (Areas for Improvement):
+---------------------------------------------
+1. Cleanliness: +0.000 (0.0% negative)
+2. Facilities: +0.000 (0.0% negative)
+3. Price/Value: +0.000 (0.0% negative)
+
+
+================================================================================
+4. COMPARISON WITH PREVIOUS APPROACHES
+================================================================================
+
+This LLM-based approach addresses the issues with previous methods:
+
+Previous Zero-Shot (XLM-RoBERTa):
+- Problem: 67-81% negative across ALL aspects
+- Cause: Model bias and unsuitable hypothesis templates
+
+Previous IndoBERTweet:
+- Problem: 74-88% negative across ALL aspects
+- Cause: Domain mismatch (trained on Twitter, not tourism)
+
+LLM-Based (Gemini):
+- Solution: Few-shot learning with domain-specific examples
+- Benefit: Context-aware sentiment understanding
+- Benefit: Handles Indonesian informal language properly
+
+================================================================================
+5. INTERPRETATION GUIDE
+================================================================================
+
+Sentiment Score:
+- Range: -1.0 (all negative) to +1.0 (all positive)
+- Score > +0.3: Strong positive (strength)
+- Score -0.1 to +0.3: Moderately positive
+- Score -0.3 to -0.1: Moderately negative
+- Score < -0.3: Strong negative (needs improvement)
+
+Confidence Levels:
+- HIGH (1.0): Clear, explicit sentiment expression
+- MEDIUM (0.7): Implied or moderate sentiment
+- LOW (0.4): Ambiguous or weak signal
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

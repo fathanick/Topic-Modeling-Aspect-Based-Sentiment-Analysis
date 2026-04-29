@@ -1,0 +1,13 @@
+aspect,aspect_name,aspect_name_id,total_mentions,positive,negative,neutral,positive_pct,negative_pct,neutral_pct,sentiment_score
+accessibility,Accessibility,Aksesibilitas,164,38,124,2,23.2%,75.6%,1.2%,-0.524
+scenery,Scenery/View,Pemandangan,163,37,118,8,22.7%,72.4%,4.9%,-0.497
+food,Food & Beverage,Makanan,127,34,92,1,26.8%,72.4%,0.8%,-0.457
+atmosphere,Atmosphere,Suasana,123,25,95,3,20.3%,77.2%,2.4%,-0.569
+safety,Safety,Keamanan,122,28,90,4,23.0%,73.8%,3.3%,-0.508
+price,Price/Value,Harga,116,34,78,4,29.3%,67.2%,3.4%,-0.379
+facilities,Facilities,Fasilitas,112,21,91,0,18.8%,81.2%,0.0%,-0.625
+cleanliness,Cleanliness,Kebersihan,98,26,67,5,26.5%,68.4%,5.1%,-0.418
+photo_spot,Photo Spots,Spot Foto,87,28,56,3,32.2%,64.4%,3.4%,-0.322
+crowd,Crowd Level,Keramaian,86,16,70,0,18.6%,81.4%,0.0%,-0.628
+service,Service,Pelayanan,46,13,31,2,28.3%,67.4%,4.3%,-0.391
+historical_value,Historical/Cultural Value,Nilai Sejarah,45,15,28,2,33.3%,62.2%,4.4%,-0.289

@@ -1,0 +1,13 @@
+aspect,aspect_name,aspect_name_id,total_mentions,positive,negative,neutral,positive_pct,negative_pct,neutral_pct,avg_confidence,sentiment_score
+cleanliness,Cleanliness,Kebersihan,0,0,0,0,0.0%,0.0%,0.0%,0,0
+facilities,Facilities,Fasilitas,0,0,0,0,0.0%,0.0%,0.0%,0,0
+price,Price/Value,Harga,0,0,0,0,0.0%,0.0%,0.0%,0,0
+service,Service,Pelayanan,0,0,0,0,0.0%,0.0%,0.0%,0,0
+accessibility,Accessibility,Aksesibilitas,0,0,0,0,0.0%,0.0%,0.0%,0,0
+scenery,Scenery/View,Pemandangan,0,0,0,0,0.0%,0.0%,0.0%,0,0
+atmosphere,Atmosphere,Suasana,0,0,0,0,0.0%,0.0%,0.0%,0,0
+food,Food & Beverage,Makanan,0,0,0,0,0.0%,0.0%,0.0%,0,0
+safety,Safety,Keamanan,0,0,0,0,0.0%,0.0%,0.0%,0,0
+crowd,Crowd Level,Keramaian,0,0,0,0,0.0%,0.0%,0.0%,0,0
+photo_spot,Photo Spots,Spot Foto,0,0,0,0,0.0%,0.0%,0.0%,0,0
+historical_value,Historical/Cultural Value,Nilai Sejarah,0,0,0,0,0.0%,0.0%,0.0%,0,0

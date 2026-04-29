@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env
+
+# Secrets / credentials
+.env.*
+*.pem
+*.key
+*.crt
+id_rsa
+id_ed25519
+secrets.json
+credentials.json
+config.local.*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code workspace
+.claude/
+
+# Large model files
+output/topic_modeling/bertopic_model

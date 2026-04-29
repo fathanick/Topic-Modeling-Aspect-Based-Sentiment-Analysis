@@ -1,0 +1,76 @@
+======================================================================
+ASPECT SENTIMENT ANALYSIS - KEY FINDINGS
+(Values from official absa_llm_summary.csv)
+======================================================================
+
+## Scenery/View
+   Mentions: 1188
+   Sentiment: 1136 positive (95.6%), 40 negative (3.4%), 12 neutral (1.0%)
+   Score: +0.923
+   Top Keywords: 'bagus' (203), 'indah' (141), 'pantai' (138), 'pemandangan' (85), 'pantainya' (84)
+
+## Facilities
+   Mentions: 805
+   Sentiment: 718 positive (89.2%), 60 negative (7.5%), 27 neutral (3.4%)
+   Score: +0.817
+   Top Keywords: 'banyak' (169), 'fasilitas' (66), 'lengkap' (55), 'luas' (51), 'pantai' (50)
+
+## Price/Value
+   Mentions: 719
+   Sentiment: 587 positive (81.6%), 97 negative (13.5%), 35 neutral (4.9%)
+   Score: +0.682
+   Top Keywords: 'harga' (101), 'murah' (93), 'tiket' (85), 'terjangkau' (80), 'masuk' (74)
+
+## Accessibility
+   Mentions: 357
+   Sentiment: 178 positive (49.9%), 157 negative (44.0%), 22 neutral (6.2%)
+   Score: +0.059
+   Top Keywords: 'jalan' (87), 'mudah' (45), 'akses' (44), 'jauh' (36), 'pantai' (34)
+
+## Crowd Level
+   Mentions: 302
+   Sentiment: 145 positive (48.0%), 132 negative (43.7%), 25 neutral (8.3%)
+   Score: +0.043
+   Top Keywords: 'ramai' (78), 'banyak' (47), 'sepi' (27), 'terlalu' (26), 'pengunjung' (24)
+
+## Atmosphere
+   Mentions: 293
+   Sentiment: 278 positive (94.9%), 13 negative (4.4%), 2 neutral (0.7%)
+   Score: +0.904
+   Top Keywords: 'nyaman' (28), 'suasana' (24), 'tenang' (22), 'sejuk' (20), 'cocok' (18)
+
+## Service
+   Mentions: 283
+   Sentiment: 227 positive (80.2%), 53 negative (18.7%), 3 neutral (1.1%)
+   Score: +0.615
+   Top Keywords: 'ramah' (112), 'baik' (25), 'foto' (12), 'membantu' (11), 'helpful' (10)
+
+## Food & Beverage
+   Mentions: 278
+   Sentiment: 233 positive (83.8%), 26 negative (9.4%), 19 neutral (6.8%)
+   Score: +0.745
+   Top Keywords: 'banyak' (63), 'ikan' (43), 'enak' (39), 'makanan' (37), 'makan' (22)
+
+## Historical Value
+   Mentions: 231
+   Sentiment: 209 positive (90.5%), 11 negative (4.8%), 11 neutral (4.8%)
+   Score: +0.857
+   Top Keywords: 'sejarah' (25), 'candi' (19), 'raja' (18), 'jogja' (15), 'bangunan' (14)
+
+## Cleanliness
+   Mentions: 212
+   Sentiment: 139 positive (65.6%), 51 negative (24.1%), 22 neutral (10.4%)
+   Score: +0.415
+   Top Keywords: 'bersih' (117), 'sampah' (31), 'pantai' (18), 'banyak' (15), 'kebersihan' (12)
+
+## Safety
+   Mentions: 129
+   Sentiment: 67 positive (51.9%), 54 negative (41.9%), 8 neutral (6.2%)
+   Score: +0.101
+   Top Keywords: 'aman' (29), 'ombaknya' (14), 'hati' (13), 'banyak' (13), 'anak' (8)
+
+## Photo Spots
+   Mentions: 129
+   Sentiment: 115 positive (89.1%), 4 negative (3.1%), 10 neutral (7.8%)
+   Score: +0.860
+   Top Keywords: 'foto' (54), 'spot' (36), 'banyak' (25), 'disebutkan' (19), 'bagus' (17)

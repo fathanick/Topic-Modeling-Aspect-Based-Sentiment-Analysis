@@ -1,0 +1,350 @@
+destination,aspect,aspect_name,total,positive,negative,neutral,sentiment_score
+Agrowisata Bhumi Merapi,scenery,Scenery/View,33,33,0,0,1.0
+Agrowisata Bhumi Merapi,facilities,Facilities,33,32,1,0,0.939
+Agrowisata Bhumi Merapi,price,Price/Value,32,32,0,0,1.0
+Agrowisata Bhumi Merapi,service,Service,16,15,1,0,0.875
+Agrowisata Bhumi Merapi,historical_value,Historical/Cultural Value,16,14,2,0,0.75
+Agrowisata Bhumi Merapi,food,Food & Beverage,14,7,3,4,0.286
+Agrowisata Bhumi Merapi,crowd,Crowd Level,14,9,5,0,0.286
+Agrowisata Bhumi Merapi,photo_spot,Photo Spots,14,14,0,0,1.0
+Agrowisata Bhumi Merapi,accessibility,Accessibility,11,9,1,1,0.727
+Agrowisata Bhumi Merapi,atmosphere,Atmosphere,10,9,1,0,0.8
+Agrowisata Bhumi Merapi,cleanliness,Cleanliness,4,4,0,0,1.0
+Bukit Bintang,scenery,Scenery/View,40,40,0,0,1.0
+Bukit Bintang,atmosphere,Atmosphere,23,21,1,1,0.87
+Bukit Bintang,food,Food & Beverage,22,12,7,3,0.227
+Bukit Bintang,price,Price/Value,11,5,3,3,0.182
+Bukit Bintang,facilities,Facilities,9,4,5,0,-0.111
+Bukit Bintang,service,Service,9,2,7,0,-0.556
+Bukit Bintang,accessibility,Accessibility,8,1,7,0,-0.75
+Bukit Bintang,cleanliness,Cleanliness,5,1,4,0,-0.6
+Bukit Bintang,crowd,Crowd Level,3,0,3,0,-1.0
+Candi Borobudur,scenery,Scenery/View,10,9,1,0,0.8
+Candi Borobudur,service,Service,10,9,1,0,0.8
+Candi Borobudur,price,Price/Value,10,8,2,0,0.6
+Candi Borobudur,facilities,Facilities,9,9,0,0,1.0
+Candi Borobudur,historical_value,Historical/Cultural Value,2,2,0,0,1.0
+Candi Borobudur,cleanliness,Cleanliness,2,2,0,0,1.0
+Candi Borobudur,crowd,Crowd Level,2,0,2,0,-1.0
+Candi Borobudur,accessibility,Accessibility,1,0,1,0,-1.0
+Candi Borobudur,safety,Safety,1,0,1,0,-1.0
+Candi Kalasan,scenery,Scenery/View,30,28,1,1,0.9
+Candi Kalasan,historical_value,Historical/Cultural Value,25,23,1,1,0.88
+Candi Kalasan,facilities,Facilities,21,13,7,1,0.286
+Candi Kalasan,price,Price/Value,19,18,0,1,0.947
+Candi Kalasan,accessibility,Accessibility,15,12,3,0,0.6
+Candi Kalasan,atmosphere,Atmosphere,9,7,2,0,0.556
+Candi Kalasan,cleanliness,Cleanliness,8,7,1,0,0.75
+Candi Kalasan,service,Service,6,5,1,0,0.667
+Candi Kalasan,crowd,Crowd Level,3,1,2,0,-0.333
+Candi Kalasan,food,Food & Beverage,2,2,0,0,1.0
+Candi Kalasan,photo_spot,Photo Spots,1,1,0,0,1.0
+Candi Mendut,scenery,Scenery/View,10,10,0,0,1.0
+Candi Mendut,historical_value,Historical/Cultural Value,8,8,0,0,1.0
+Candi Mendut,facilities,Facilities,7,7,0,0,1.0
+Candi Mendut,cleanliness,Cleanliness,3,3,0,0,1.0
+Candi Mendut,accessibility,Accessibility,3,3,0,0,1.0
+Candi Mendut,service,Service,3,3,0,0,1.0
+Candi Mendut,price,Price/Value,2,2,0,0,1.0
+Candi Prambanan,facilities,Facilities,36,35,1,0,0.944
+Candi Prambanan,price,Price/Value,35,30,5,0,0.714
+Candi Prambanan,scenery,Scenery/View,31,31,0,0,1.0
+Candi Prambanan,service,Service,18,17,1,0,0.889
+Candi Prambanan,cleanliness,Cleanliness,15,14,1,0,0.867
+Candi Prambanan,historical_value,Historical/Cultural Value,14,14,0,0,1.0
+Candi Prambanan,atmosphere,Atmosphere,7,7,0,0,1.0
+Candi Prambanan,accessibility,Accessibility,6,4,2,0,0.333
+Candi Prambanan,crowd,Crowd Level,4,2,2,0,0.0
+Candi Prambanan,food,Food & Beverage,3,2,1,0,0.333
+Candi Prambanan,photo_spot,Photo Spots,1,1,0,0,1.0
+Candi Prambanan,safety,Safety,1,1,0,0,1.0
+Gumuk Pasir Parangkusumo,scenery,Scenery/View,41,40,1,0,0.951
+Gumuk Pasir Parangkusumo,facilities,Facilities,30,28,2,0,0.867
+Gumuk Pasir Parangkusumo,price,Price/Value,30,27,3,0,0.8
+Gumuk Pasir Parangkusumo,crowd,Crowd Level,19,17,2,0,0.789
+Gumuk Pasir Parangkusumo,atmosphere,Atmosphere,17,17,0,0,1.0
+Gumuk Pasir Parangkusumo,photo_spot,Photo Spots,15,15,0,0,1.0
+Gumuk Pasir Parangkusumo,service,Service,14,14,0,0,1.0
+Gumuk Pasir Parangkusumo,accessibility,Accessibility,13,9,4,0,0.385
+Gumuk Pasir Parangkusumo,historical_value,Historical/Cultural Value,12,12,0,0,1.0
+Gumuk Pasir Parangkusumo,food,Food & Beverage,1,1,0,0,1.0
+Gumuk Pasir Parangkusumo,safety,Safety,1,0,1,0,-1.0
+Gumuk Pasir Parangkusumo,cleanliness,Cleanliness,1,1,0,0,1.0
+Makam Raja-Raja Imogiri,scenery,Scenery/View,27,27,0,0,1.0
+Makam Raja-Raja Imogiri,service,Service,24,21,3,0,0.75
+Makam Raja-Raja Imogiri,historical_value,Historical/Cultural Value,18,17,1,0,0.889
+Makam Raja-Raja Imogiri,facilities,Facilities,16,10,3,3,0.438
+Makam Raja-Raja Imogiri,price,Price/Value,14,8,2,4,0.429
+Makam Raja-Raja Imogiri,atmosphere,Atmosphere,11,11,0,0,1.0
+Makam Raja-Raja Imogiri,cleanliness,Cleanliness,11,7,0,4,0.636
+Makam Raja-Raja Imogiri,accessibility,Accessibility,8,1,7,0,-0.75
+Makam Raja-Raja Imogiri,food,Food & Beverage,6,6,0,0,1.0
+Makam Raja-Raja Imogiri,crowd,Crowd Level,2,1,0,1,0.5
+Makam Raja-Raja Imogiri,photo_spot,Photo Spots,2,2,0,0,1.0
+Malioboro,atmosphere,Atmosphere,19,18,0,1,0.947
+Malioboro,food,Food & Beverage,15,14,1,0,0.867
+Malioboro,crowd,Crowd Level,15,14,1,0,0.867
+Malioboro,scenery,Scenery/View,13,12,0,1,0.923
+Malioboro,facilities,Facilities,9,9,0,0,1.0
+Malioboro,historical_value,Historical/Cultural Value,8,8,0,0,1.0
+Malioboro,accessibility,Accessibility,6,2,4,0,-0.333
+Malioboro,price,Price/Value,5,3,2,0,0.2
+Malioboro,safety,Safety,5,3,2,0,0.2
+Malioboro,cleanliness,Cleanliness,4,3,0,1,0.75
+Malioboro,service,Service,3,2,1,0,0.333
+Malioboro,photo_spot,Photo Spots,3,3,0,0,1.0
+Museum Ullen Sentalu,service,Service,22,20,2,0,0.818
+Museum Ullen Sentalu,historical_value,Historical/Cultural Value,19,19,0,0,1.0
+Museum Ullen Sentalu,scenery,Scenery/View,16,15,0,1,0.938
+Museum Ullen Sentalu,facilities,Facilities,16,14,1,1,0.812
+Museum Ullen Sentalu,atmosphere,Atmosphere,14,14,0,0,1.0
+Museum Ullen Sentalu,price,Price/Value,12,9,2,1,0.583
+Museum Ullen Sentalu,food,Food & Beverage,2,2,0,0,1.0
+Museum Ullen Sentalu,cleanliness,Cleanliness,1,1,0,0,1.0
+Museum Ullen Sentalu,accessibility,Accessibility,1,0,1,0,-1.0
+Pantai Baron,scenery,Scenery/View,45,37,7,1,0.667
+Pantai Baron,price,Price/Value,31,23,8,0,0.484
+Pantai Baron,facilities,Facilities,26,26,0,0,1.0
+Pantai Baron,accessibility,Accessibility,24,8,16,0,-0.333
+Pantai Baron,food,Food & Beverage,12,12,0,0,1.0
+Pantai Baron,safety,Safety,10,5,5,0,0.0
+Pantai Baron,atmosphere,Atmosphere,7,7,0,0,1.0
+Pantai Baron,historical_value,Historical/Cultural Value,6,3,3,0,0.0
+Pantai Baron,crowd,Crowd Level,6,2,4,0,-0.333
+Pantai Baron,cleanliness,Cleanliness,3,2,1,0,0.333
+Pantai Baron,service,Service,2,0,2,0,-1.0
+Pantai Baru,scenery,Scenery/View,41,39,2,0,0.902
+Pantai Baru,facilities,Facilities,39,37,2,0,0.897
+Pantai Baru,food,Food & Beverage,34,34,0,0,1.0
+Pantai Baru,price,Price/Value,27,24,1,2,0.852
+Pantai Baru,atmosphere,Atmosphere,15,14,1,0,0.867
+Pantai Baru,cleanliness,Cleanliness,14,7,4,3,0.214
+Pantai Baru,safety,Safety,9,5,4,0,0.111
+Pantai Baru,crowd,Crowd Level,8,3,4,1,-0.125
+Pantai Baru,accessibility,Accessibility,7,6,0,1,0.857
+Pantai Baru,service,Service,3,3,0,0,1.0
+Pantai Baru,photo_spot,Photo Spots,2,1,1,0,0.0
+Pantai Depok,food,Food & Beverage,37,31,6,0,0.676
+Pantai Depok,scenery,Scenery/View,29,26,1,2,0.862
+Pantai Depok,price,Price/Value,20,10,10,0,0.0
+Pantai Depok,facilities,Facilities,17,15,1,1,0.824
+Pantai Depok,cleanliness,Cleanliness,15,2,13,0,-0.733
+Pantai Depok,accessibility,Accessibility,9,9,0,0,1.0
+Pantai Depok,service,Service,8,1,6,1,-0.625
+Pantai Depok,crowd,Crowd Level,5,3,2,0,0.2
+Pantai Depok,safety,Safety,3,0,3,0,-1.0
+Pantai Depok,atmosphere,Atmosphere,2,2,0,0,1.0
+Pantai Drini,scenery,Scenery/View,39,38,1,0,0.949
+Pantai Drini,price,Price/Value,33,30,3,0,0.818
+Pantai Drini,facilities,Facilities,31,30,1,0,0.935
+Pantai Drini,crowd,Crowd Level,25,13,12,0,0.04
+Pantai Drini,safety,Safety,9,7,2,0,0.556
+Pantai Drini,accessibility,Accessibility,7,3,4,0,-0.143
+Pantai Drini,atmosphere,Atmosphere,7,6,1,0,0.714
+Pantai Drini,photo_spot,Photo Spots,7,7,0,0,1.0
+Pantai Drini,historical_value,Historical/Cultural Value,7,7,0,0,1.0
+Pantai Drini,cleanliness,Cleanliness,6,5,1,0,0.667
+Pantai Drini,service,Service,6,5,1,0,0.667
+Pantai Drini,food,Food & Beverage,5,5,0,0,1.0
+Pantai Gesing,scenery,Scenery/View,43,36,7,0,0.674
+Pantai Gesing,price,Price/Value,34,28,6,0,0.647
+Pantai Gesing,facilities,Facilities,30,26,4,0,0.733
+Pantai Gesing,accessibility,Accessibility,12,5,7,0,-0.167
+Pantai Gesing,cleanliness,Cleanliness,9,8,1,0,0.778
+Pantai Gesing,crowd,Crowd Level,8,1,6,1,-0.625
+Pantai Gesing,atmosphere,Atmosphere,8,8,0,0,1.0
+Pantai Gesing,photo_spot,Photo Spots,4,4,0,0,1.0
+Pantai Gesing,service,Service,4,4,0,0,1.0
+Pantai Gesing,safety,Safety,4,2,2,0,0.0
+Pantai Gesing,historical_value,Historical/Cultural Value,3,2,1,0,0.333
+Pantai Indrayanti,scenery,Scenery/View,54,54,0,0,1.0
+Pantai Indrayanti,price,Price/Value,34,31,3,0,0.824
+Pantai Indrayanti,facilities,Facilities,31,29,2,0,0.871
+Pantai Indrayanti,crowd,Crowd Level,18,7,11,0,-0.222
+Pantai Indrayanti,safety,Safety,16,7,9,0,-0.125
+Pantai Indrayanti,food,Food & Beverage,14,12,1,1,0.786
+Pantai Indrayanti,accessibility,Accessibility,13,12,1,0,0.846
+Pantai Indrayanti,cleanliness,Cleanliness,9,6,0,3,0.667
+Pantai Indrayanti,service,Service,8,7,1,0,0.75
+Pantai Indrayanti,atmosphere,Atmosphere,6,6,0,0,1.0
+Pantai Indrayanti,photo_spot,Photo Spots,3,3,0,0,1.0
+Pantai Indrayanti,historical_value,Historical/Cultural Value,1,1,0,0,1.0
+Pantai Kesirat,scenery,Scenery/View,83,83,0,0,1.0
+Pantai Kesirat,facilities,Facilities,58,56,2,0,0.931
+Pantai Kesirat,accessibility,Accessibility,32,12,19,1,-0.219
+Pantai Kesirat,price,Price/Value,29,29,0,0,1.0
+Pantai Kesirat,crowd,Crowd Level,9,9,0,0,1.0
+Pantai Kesirat,atmosphere,Atmosphere,6,6,0,0,1.0
+Pantai Kesirat,cleanliness,Cleanliness,3,1,2,0,-0.333
+Pantai Kesirat,safety,Safety,2,0,2,0,-1.0
+Pantai Krakal,scenery,Scenery/View,16,16,0,0,1.0
+Pantai Krakal,atmosphere,Atmosphere,4,4,0,0,1.0
+Pantai Krakal,facilities,Facilities,4,4,0,0,1.0
+Pantai Krakal,accessibility,Accessibility,2,2,0,0,1.0
+Pantai Krakal,safety,Safety,2,2,0,0,1.0
+Pantai Krakal,cleanliness,Cleanliness,2,2,0,0,1.0
+Pantai Krakal,price,Price/Value,2,2,0,0,1.0
+Pantai Krakal,crowd,Crowd Level,2,2,0,0,1.0
+Pantai Krakal,food,Food & Beverage,2,2,0,0,1.0
+Pantai Kukup,scenery,Scenery/View,47,46,1,0,0.957
+Pantai Kukup,facilities,Facilities,28,28,0,0,1.0
+Pantai Kukup,price,Price/Value,24,22,2,0,0.833
+Pantai Kukup,service,Service,16,13,3,0,0.625
+Pantai Kukup,crowd,Crowd Level,14,10,4,0,0.429
+Pantai Kukup,food,Food & Beverage,14,12,2,0,0.714
+Pantai Kukup,cleanliness,Cleanliness,13,11,2,0,0.692
+Pantai Kukup,accessibility,Accessibility,10,5,3,2,0.2
+Pantai Kukup,photo_spot,Photo Spots,4,4,0,0,1.0
+Pantai Kukup,atmosphere,Atmosphere,2,1,1,0,0.0
+Pantai Kukup,safety,Safety,1,0,1,0,-1.0
+Pantai Nglambor,scenery,Scenery/View,39,39,0,0,1.0
+Pantai Nglambor,facilities,Facilities,33,29,3,1,0.788
+Pantai Nglambor,price,Price/Value,29,22,6,1,0.552
+Pantai Nglambor,accessibility,Accessibility,24,0,23,1,-0.958
+Pantai Nglambor,service,Service,13,13,0,0,1.0
+Pantai Nglambor,crowd,Crowd Level,11,0,11,0,-1.0
+Pantai Nglambor,safety,Safety,7,6,1,0,0.714
+Pantai Nglambor,cleanliness,Cleanliness,7,5,2,0,0.429
+Pantai Nglambor,food,Food & Beverage,4,4,0,0,1.0
+Pantai Ngobaran,scenery,Scenery/View,38,34,2,2,0.842
+Pantai Ngobaran,facilities,Facilities,37,36,1,0,0.946
+Pantai Ngobaran,price,Price/Value,26,22,4,0,0.692
+Pantai Ngobaran,accessibility,Accessibility,18,8,10,0,-0.111
+Pantai Ngobaran,photo_spot,Photo Spots,15,14,1,0,0.867
+Pantai Ngobaran,crowd,Crowd Level,12,4,8,0,-0.333
+Pantai Ngobaran,atmosphere,Atmosphere,9,9,0,0,1.0
+Pantai Ngobaran,service,Service,6,4,2,0,0.333
+Pantai Ngobaran,safety,Safety,5,1,4,0,-0.6
+Pantai Ngobaran,historical_value,Historical/Cultural Value,4,4,0,0,1.0
+Pantai Ngobaran,cleanliness,Cleanliness,3,3,0,0,1.0
+Pantai Ngobaran,food,Food & Beverage,1,1,0,0,1.0
+Pantai Parangtritis,scenery,Scenery/View,39,37,2,0,0.897
+Pantai Parangtritis,price,Price/Value,26,18,8,0,0.385
+Pantai Parangtritis,facilities,Facilities,23,22,1,0,0.913
+Pantai Parangtritis,atmosphere,Atmosphere,13,12,1,0,0.846
+Pantai Parangtritis,cleanliness,Cleanliness,12,2,7,3,-0.417
+Pantai Parangtritis,safety,Safety,7,1,6,0,-0.714
+Pantai Parangtritis,service,Service,7,5,2,0,0.429
+Pantai Parangtritis,crowd,Crowd Level,6,2,4,0,-0.333
+Pantai Parangtritis,food,Food & Beverage,5,3,2,0,0.2
+Pantai Parangtritis,accessibility,Accessibility,5,5,0,0,1.0
+Pantai Parangtritis,historical_value,Historical/Cultural Value,3,3,0,0,1.0
+Pantai Parangtritis,photo_spot,Photo Spots,1,0,1,0,-1.0
+Pantai Pok Tunggal,scenery,Scenery/View,50,50,0,0,1.0
+Pantai Pok Tunggal,price,Price/Value,26,16,2,8,0.538
+Pantai Pok Tunggal,facilities,Facilities,23,14,0,9,0.609
+Pantai Pok Tunggal,accessibility,Accessibility,20,3,13,4,-0.5
+Pantai Pok Tunggal,crowd,Crowd Level,18,7,1,10,0.333
+Pantai Pok Tunggal,cleanliness,Cleanliness,13,7,0,6,0.538
+Pantai Pok Tunggal,historical_value,Historical/Cultural Value,11,1,0,10,0.091
+Pantai Pok Tunggal,safety,Safety,11,1,2,8,-0.091
+Pantai Pok Tunggal,atmosphere,Atmosphere,11,10,1,0,0.818
+Pantai Pok Tunggal,food,Food & Beverage,10,0,0,10,0.0
+Pantai Pok Tunggal,photo_spot,Photo Spots,10,10,0,0,1.0
+Pantai Pok Tunggal,service,Service,3,3,0,0,1.0
+Pantai Sadeng,scenery,Scenery/View,50,44,6,0,0.76
+Pantai Sadeng,facilities,Facilities,29,23,6,0,0.586
+Pantai Sadeng,food,Food & Beverage,21,21,0,0,1.0
+Pantai Sadeng,price,Price/Value,17,16,1,0,0.882
+Pantai Sadeng,crowd,Crowd Level,12,4,8,0,-0.333
+Pantai Sadeng,accessibility,Accessibility,11,7,4,0,0.273
+Pantai Sadeng,safety,Safety,7,5,2,0,0.429
+Pantai Sadeng,cleanliness,Cleanliness,4,1,3,0,-0.5
+Pantai Sadeng,atmosphere,Atmosphere,3,2,1,0,0.333
+Pantai Sadeng,service,Service,3,3,0,0,1.0
+Pantai Sadranan,scenery,Scenery/View,51,49,2,0,0.922
+Pantai Sadranan,facilities,Facilities,47,45,2,0,0.915
+Pantai Sadranan,price,Price/Value,32,27,5,0,0.688
+Pantai Sadranan,service,Service,18,10,8,0,0.111
+Pantai Sadranan,safety,Safety,11,8,3,0,0.455
+Pantai Sadranan,accessibility,Accessibility,8,7,1,0,0.75
+Pantai Sadranan,food,Food & Beverage,7,7,0,0,1.0
+Pantai Sadranan,crowd,Crowd Level,5,1,4,0,-0.6
+Pantai Sadranan,cleanliness,Cleanliness,3,3,0,0,1.0
+Pantai Slili,scenery,Scenery/View,33,31,0,2,0.939
+Pantai Slili,facilities,Facilities,30,29,1,0,0.933
+Pantai Slili,price,Price/Value,22,17,5,0,0.545
+Pantai Slili,crowd,Crowd Level,14,8,4,2,0.286
+Pantai Slili,cleanliness,Cleanliness,7,3,3,1,0.0
+Pantai Slili,photo_spot,Photo Spots,5,5,0,0,1.0
+Pantai Slili,food,Food & Beverage,4,3,1,0,0.5
+Pantai Slili,safety,Safety,4,2,2,0,0.0
+Pantai Slili,service,Service,3,0,3,0,-1.0
+Pantai Slili,accessibility,Accessibility,3,3,0,0,1.0
+Pantai Slili,atmosphere,Atmosphere,2,2,0,0,1.0
+Pantai Sundak,scenery,Scenery/View,41,40,0,1,0.976
+Pantai Sundak,facilities,Facilities,39,35,4,0,0.795
+Pantai Sundak,price,Price/Value,32,24,6,2,0.562
+Pantai Sundak,crowd,Crowd Level,11,4,7,0,-0.273
+Pantai Sundak,atmosphere,Atmosphere,8,8,0,0,1.0
+Pantai Sundak,cleanliness,Cleanliness,8,8,0,0,1.0
+Pantai Sundak,accessibility,Accessibility,7,6,1,0,0.714
+Pantai Sundak,service,Service,6,4,2,0,0.333
+Pantai Sundak,food,Food & Beverage,5,4,1,0,0.6
+Pantai Sundak,safety,Safety,4,3,1,0,0.5
+Pantai Wediombo,scenery,Scenery/View,65,61,4,0,0.877
+Pantai Wediombo,facilities,Facilities,25,19,4,2,0.6
+Pantai Wediombo,accessibility,Accessibility,25,16,7,2,0.36
+Pantai Wediombo,price,Price/Value,24,19,2,3,0.708
+Pantai Wediombo,service,Service,13,9,4,0,0.385
+Pantai Wediombo,cleanliness,Cleanliness,5,0,5,0,-1.0
+Pantai Wediombo,atmosphere,Atmosphere,3,3,0,0,1.0
+Pantai Wediombo,safety,Safety,2,2,0,0,1.0
+Pantai Wediombo,historical_value,Historical/Cultural Value,2,2,0,0,1.0
+Pantai Wediombo,crowd,Crowd Level,2,2,0,0,1.0
+Prawirotaman,atmosphere,Atmosphere,17,17,0,0,1.0
+Prawirotaman,food,Food & Beverage,15,14,1,0,0.867
+Prawirotaman,crowd,Crowd Level,14,12,2,0,0.714
+Prawirotaman,scenery,Scenery/View,8,8,0,0,1.0
+Prawirotaman,facilities,Facilities,7,6,0,1,0.857
+Prawirotaman,historical_value,Historical/Cultural Value,7,5,2,0,0.429
+Prawirotaman,photo_spot,Photo Spots,6,6,0,0,1.0
+Prawirotaman,price,Price/Value,5,2,3,0,-0.2
+Prawirotaman,accessibility,Accessibility,5,4,1,0,0.6
+Prawirotaman,cleanliness,Cleanliness,2,2,0,0,1.0
+Prawirotaman,service,Service,2,2,0,0,1.0
+Sendang Sono,scenery,Scenery/View,32,32,0,0,1.0
+Sendang Sono,atmosphere,Atmosphere,31,29,2,0,0.871
+Sendang Sono,accessibility,Accessibility,26,3,15,8,-0.462
+Sendang Sono,facilities,Facilities,24,23,0,1,0.958
+Sendang Sono,service,Service,23,23,0,0,1.0
+Sendang Sono,historical_value,Historical/Cultural Value,19,19,0,0,1.0
+Sendang Sono,crowd,Crowd Level,17,0,7,10,-0.412
+Sendang Sono,price,Price/Value,10,2,0,8,0.2
+Sendang Sono,photo_spot,Photo Spots,10,0,0,10,0.0
+Sendang Sono,cleanliness,Cleanliness,6,6,0,0,1.0
+Sendang Sono,safety,Safety,5,4,1,0,0.6
+Sendang Sono,food,Food & Beverage,1,0,0,1,0.0
+Situs Warungboto,price,Price/Value,43,40,1,2,0.907
+Situs Warungboto,scenery,Scenery/View,39,37,1,1,0.923
+Situs Warungboto,facilities,Facilities,25,14,5,6,0.36
+Situs Warungboto,historical_value,Historical/Cultural Value,19,18,1,0,0.895
+Situs Warungboto,crowd,Crowd Level,14,4,10,0,-0.429
+Situs Warungboto,photo_spot,Photo Spots,11,11,0,0,1.0
+Situs Warungboto,accessibility,Accessibility,10,7,1,2,0.6
+Situs Warungboto,cleanliness,Cleanliness,9,8,0,1,0.889
+Situs Warungboto,atmosphere,Atmosphere,4,4,0,0,1.0
+Situs Warungboto,service,Service,4,2,0,2,0.5
+Studio Alam Gamplong,scenery,Scenery/View,22,22,0,0,1.0
+Studio Alam Gamplong,price,Price/Value,22,20,2,0,0.818
+Studio Alam Gamplong,facilities,Facilities,10,9,1,0,0.8
+Studio Alam Gamplong,photo_spot,Photo Spots,7,7,0,0,1.0
+Studio Alam Gamplong,atmosphere,Atmosphere,4,3,1,0,0.5
+Studio Alam Gamplong,historical_value,Historical/Cultural Value,4,4,0,0,1.0
+Studio Alam Gamplong,cleanliness,Cleanliness,3,3,0,0,1.0
+Studio Alam Gamplong,service,Service,3,2,1,0,0.333
+Studio Alam Gamplong,food,Food & Beverage,2,2,0,0,1.0
+Studio Alam Gamplong,accessibility,Accessibility,2,1,1,0,0.0
+Studio Alam Gamplong,crowd,Crowd Level,1,0,1,0,-1.0
+Tugu Jogja,scenery,Scenery/View,33,32,1,0,0.939
+Tugu Jogja,historical_value,Historical/Cultural Value,23,23,0,0,1.0
+Tugu Jogja,atmosphere,Atmosphere,21,21,0,0,1.0
+Tugu Jogja,food,Food & Beverage,20,20,0,0,1.0
+Tugu Jogja,photo_spot,Photo Spots,8,7,1,0,0.75
+Tugu Jogja,crowd,Crowd Level,8,3,5,0,-0.25
+Tugu Jogja,service,Service,7,6,1,0,0.714
+Tugu Jogja,accessibility,Accessibility,5,5,0,0,1.0
+Tugu Jogja,facilities,Facilities,3,2,0,1,0.667
+Tugu Jogja,cleanliness,Cleanliness,2,1,1,0,0.0
+Tugu Jogja,safety,Safety,2,2,0,0,1.0
+Tugu Jogja,price,Price/Value,1,1,0,0,1.0

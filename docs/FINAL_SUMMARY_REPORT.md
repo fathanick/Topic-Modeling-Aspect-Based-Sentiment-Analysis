@@ -345,6 +345,61 @@ For detailed technical documentation on the scraping process, see:
 
 **Formula:** `Sentiment Score = (Positive - Negative) / Total`
 
+### 5.6 Aspect Visualization Analysis
+
+Word cloud and keyword analysis was performed on the evidence text extracted for each aspect. The visualizations reveal the dominant vocabulary and expressions used by visitors.
+
+#### 5.6.1 High-Performing Aspects (Score > +0.8)
+
+**Scenery/View (+0.923)** - 1,188 mentions (95.6% positive)
+- Top Keywords: 'bagus', 'indah', 'pantai', 'pemandangan', 'cantik'
+- Common Expressions: "pemandangannya indah banget", "view sunset mantap", "pantainya bagus"
+
+**Atmosphere (+0.904)** - 293 mentions (94.9% positive)
+- Top Keywords: 'nyaman', 'suasana', 'tenang', 'sejuk', 'cocok'
+- Common Expressions: "suasananya tenang", "nyaman buat santai", "sejuk dan asri"
+
+**Photo Spots (+0.860)** - 129 mentions (89.1% positive)
+- Top Keywords: 'foto', 'spot', 'banyak', 'bagus'
+- Common Expressions: "spot foto bagus", "banyak tempat foto", "instagramable"
+
+**Historical Value (+0.857)** - 231 mentions (90.5% positive)
+- Top Keywords: 'sejarah', 'candi', 'raja', 'bangunan', 'warisan'
+- Common Expressions: "nilai sejarah tinggi", "belajar sejarah", "warisan budaya"
+
+#### 5.6.2 Areas Requiring Improvement (Score < +0.3)
+
+**Crowd Level (+0.043)** - 302 mentions (48.0% positive, 43.7% negative)
+- Top Keywords: 'ramai', 'banyak', 'sepi', 'terlalu', 'pengunjung'
+- Positive: "tidak terlalu ramai", "sepi dan tenang"
+- Negative: "terlalu ramai", "weekend ramai sekali"
+
+**Accessibility (+0.059)** - 357 mentions (49.9% positive, 44.0% negative)
+- Top Keywords: 'jalan', 'mudah', 'akses', 'jauh', 'susah'
+- Positive: "akses mudah", "jalan bagus"
+- Negative: "jalannya rusak", "akses sulit", "jauh dari kota"
+
+**Safety (+0.101)** - 129 mentions (51.9% positive, 41.9% negative)
+- Top Keywords: 'aman', 'ombaknya', 'hati', 'bahaya', 'anak'
+- Positive: "lokasi aman", "aman untuk keluarga"
+- Negative: "ombaknya besar", "hati-hati", "bahaya"
+
+#### 5.6.3 Visualizations Generated
+
+Location: `visualizations/absa_llm/`
+
+| Visualization | Description |
+|---------------|-------------|
+| `wordcloud_{aspect}.png` | Word clouds for each of 12 aspects |
+| `wordcloud_{aspect}_positive.png` | Positive sentiment word clouds |
+| `wordcloud_{aspect}_negative.png` | Negative sentiment word clouds |
+| `sentiment_distribution_by_aspect.png` | Stacked bar chart of sentiment % |
+| `sentiment_scores_by_aspect.png` | Sentiment score comparison |
+| `aspect_cooccurrence_heatmap.png` | Aspect co-occurrence matrix |
+| `top_keywords_by_aspect.png` | Top 10 keywords per aspect |
+| `mentions_by_aspect.png` | Aspect mention frequency |
+| `aspect_analysis_summary.txt` | Text summary with official statistics |
+
 ---
 
 ## 6. Key Findings & Recommendations
@@ -464,8 +519,10 @@ Topic-Modeling-Aspect-Based-Sentiment-Analysis/
 │   │   └── preprocessing.py
 │   ├── topic_modeling/
 │   │   └── topic_modeling_bertopic.py
-│   └── sentiment_analysis/
-│       └── absa_llm_groq.py
+│   ├── sentiment_analysis/
+│   │   └── absa_llm_groq.py
+│   └── visualization/
+│       └── absa_aspect_visualizations.py
 ├── output/
 │   ├── topic_modeling/
 │   │   ├── topic_modeling_results.csv
@@ -476,15 +533,26 @@ Topic-Modeling-Aspect-Based-Sentiment-Analysis/
 │       ├── absa_llm_summary.csv
 │       └── absa_llm_by_destination.csv
 ├── visualizations/
-│   └── topic_modeling/
-│       ├── topic_visualization_barchart.html
-│       ├── topic_visualization_heatmap.html
-│       ├── topic_visualization_hierarchy.html
-│       └── topic_visualization_intertopic_distance.html
+│   ├── topic_modeling/
+│   │   ├── topic_visualization_barchart.html
+│   │   ├── topic_visualization_heatmap.html
+│   │   ├── topic_visualization_hierarchy.html
+│   │   └── topic_visualization_intertopic_distance.html
+│   └── absa_llm/
+│       ├── wordcloud_{aspect}.png (12 aspects)
+│       ├── wordcloud_{aspect}_positive.png
+│       ├── wordcloud_{aspect}_negative.png
+│       ├── sentiment_distribution_by_aspect.png
+│       ├── sentiment_scores_by_aspect.png
+│       ├── aspect_cooccurrence_heatmap.png
+│       ├── top_keywords_by_aspect.png
+│       ├── mentions_by_aspect.png
+│       └── aspect_analysis_summary.txt
 ├── docs/
 │   ├── scraping_documentation.txt
 │   ├── preprocessing_documentation.txt
 │   ├── topic_modeling_documentation.txt
+│   ├── absa_visualization_documentation.txt
 │   ├── absa_llm_groq_documentation.txt
 │   └── FINAL_SUMMARY_REPORT.md (this file)
 ├── README.md

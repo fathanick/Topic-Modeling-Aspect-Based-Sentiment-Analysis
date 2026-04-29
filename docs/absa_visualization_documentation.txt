@@ -1,0 +1,445 @@
+================================================================================
+ABSA VISUALIZATION DOCUMENTATION
+Aspect-Based Sentiment Analysis - Visual Analysis Results
+================================================================================
+
+Project: Topic Modeling and Aspect-Based Sentiment Analysis
+Date: February 2026
+Author: Automated Analysis Pipeline
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+
+1. Overview
+2. Word Cloud Visualizations
+3. Sentiment Distribution Visualizations
+4. Aspect Co-occurrence Analysis
+5. Key Findings per Aspect
+6. File Reference
+7. Usage Guidelines
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+This documentation covers the visualization outputs generated from the LLM-based
+Aspect-Based Sentiment Analysis (ABSA) of 1,530 Yogyakarta tourism reviews.
+
+The visualizations are designed to:
+- Identify dominant keywords and expressions for each tourism aspect
+- Show sentiment distribution patterns across aspects
+- Reveal relationships between aspects
+- Support qualitative discussion in research papers
+
+Data Source: output/absa_llm_groq/absa_llm_results.csv
+Statistics Source: output/absa_llm_groq/absa_llm_summary.csv
+Output Location: visualizations/absa_llm/
+Total Visualizations: 41 files
+
+================================================================================
+2. WORD CLOUD VISUALIZATIONS
+================================================================================
+
+2.1 Purpose
+-----------
+Word clouds visualize the most frequent terms used by visitors when discussing
+each tourism aspect. Larger words indicate higher frequency, helping identify
+common expressions and vocabulary patterns.
+
+2.2 Types of Word Clouds
+------------------------
+For each of the 12 aspects, up to 3 word clouds are generated:
+
+| Type | Filename Pattern | Description |
+|------|------------------|-------------|
+| Combined | wordcloud_{aspect}.png | All sentiment evidence combined |
+| Positive | wordcloud_{aspect}_positive.png | Positive sentiment evidence only |
+| Negative | wordcloud_{aspect}_negative.png | Negative sentiment evidence only |
+
+2.3 Word Cloud Configuration
+----------------------------
+| Parameter | Value |
+|-----------|-------|
+| Dimensions | 800 x 400 pixels |
+| Max Words | 100 |
+| Min Font Size | 10 |
+| Max Font Size | 100 |
+| Background | White |
+| Colormap | Blues (combined), Greens (positive), Reds (negative) |
+
+2.4 Text Preprocessing
+----------------------
+Before generating word clouds, text is processed:
+1. Convert to lowercase
+2. Remove special characters (keep alphanumeric and spaces)
+3. Tokenize into words
+4. Remove stop words (Indonesian + English, 50+ words)
+5. Filter words with length <= 2
+
+Stop words filtered: yang, dan, di, ke, dari, untuk, dengan, adalah, ini, itu,
+juga, ada, bisa, sangat, sekali, banget, nya, ya, sih, aja, sudah, tidak, ga,
+gak, nggak, tapi, atau, kalau, kalo, jadi, buat, sama, lagi, pas, saat, waktu,
+disini, kesini, sini, tempat, tempatnya, the, and, to, of, a, in, for, is, on
+
+================================================================================
+3. SENTIMENT DISTRIBUTION VISUALIZATIONS
+================================================================================
+
+3.1 Sentiment Distribution by Aspect (sentiment_distribution_by_aspect.png)
+---------------------------------------------------------------------------
+Horizontal stacked bar chart showing the percentage breakdown of positive,
+negative, and neutral sentiments for each aspect.
+
+Features:
+- Aspects sorted by sentiment score (lowest to highest)
+- Color coding: Green (positive), Gray (neutral), Red (negative)
+- Sample size (n) annotated for each aspect
+- X-axis shows percentage (0-100%)
+
+3.2 Sentiment Scores by Aspect (sentiment_scores_by_aspect.png)
+---------------------------------------------------------------
+Horizontal bar chart displaying the sentiment score for each aspect.
+
+Sentiment Score Formula: (Positive - Negative) / Total
+
+Score Interpretation:
+| Range | Color | Meaning |
+|-------|-------|---------|
+| 0.6 - 1.0 | Green | Strong positive sentiment |
+| 0.3 - 0.6 | Orange | Moderate positive sentiment |
+| < 0.3 | Red | Weak/mixed sentiment (needs improvement) |
+
+3.3 Mentions by Aspect (mentions_by_aspect.png)
+-----------------------------------------------
+Horizontal bar chart showing the number of times each aspect was mentioned
+across all reviews. Indicates which aspects visitors discuss most frequently.
+
+================================================================================
+4. ASPECT CO-OCCURRENCE ANALYSIS
+================================================================================
+
+4.1 Co-occurrence Heatmap (aspect_cooccurrence_heatmap.png)
+-----------------------------------------------------------
+Matrix visualization showing how often aspects appear together in the same
+review. Values are normalized by diagonal (self-occurrence).
+
+Interpretation:
+- Value of 1.0 on diagonal = aspect appears with itself (baseline)
+- High off-diagonal values = aspects frequently discussed together
+- Low values = aspects rarely discussed together
+
+Key Observations:
+- Scenery often co-occurs with Atmosphere (visitors describe views + ambiance)
+- Facilities co-occurs with Price (visitors evaluate value for money)
+- Safety and Crowd often appear together (safety concerns in crowded areas)
+
+4.2 Top Keywords by Aspect (top_keywords_by_aspect.png)
+-------------------------------------------------------
+Grid of 12 horizontal bar charts showing the top 10 keywords for each aspect.
+Useful for identifying the specific vocabulary used when discussing each aspect.
+
+================================================================================
+5. KEY FINDINGS PER ASPECT
+================================================================================
+
+5.1 SCENERY/VIEW (Score: +0.923)
+--------------------------------
+Mentions: 1,188 | Positive: 95.6% | Negative: 3.4% | Neutral: 1.0%
+
+Top Keywords:
+- 'bagus' - good/nice
+- 'indah' - beautiful
+- 'pantai' - beach
+- 'pemandangan' - view/scenery
+- 'cantik' - pretty
+
+Common Expressions:
+"pemandangannya indah banget" (the view is very beautiful)
+"view sunset mantap" (amazing sunset view)
+"pantainya bagus" (the beach is nice)
+
+5.2 ATMOSPHERE (Score: +0.904)
+------------------------------
+Mentions: 293 | Positive: 94.9% | Negative: 4.4% | Neutral: 0.7%
+
+Top Keywords:
+- 'nyaman' - comfortable
+- 'suasana' - atmosphere
+- 'tenang' - calm/peaceful
+- 'sejuk' - cool/fresh
+- 'cocok' - suitable
+
+Common Expressions:
+"suasananya tenang" (the atmosphere is calm)
+"nyaman buat santai" (comfortable for relaxing)
+"sejuk dan asri" (cool and green)
+
+5.3 PHOTO SPOTS (Score: +0.860)
+-------------------------------
+Mentions: 129 | Positive: 89.1% | Negative: 3.1% | Neutral: 7.8%
+
+Top Keywords:
+- 'foto' - photo
+- 'spot' - spot
+- 'banyak' - many
+- 'bagus' - good
+
+Common Expressions:
+"spot foto bagus" (good photo spots)
+"banyak tempat foto" (many places for photos)
+"instagramable" (instagram-worthy)
+
+5.4 HISTORICAL VALUE (Score: +0.857)
+------------------------------------
+Mentions: 231 | Positive: 90.5% | Negative: 4.8% | Neutral: 4.8%
+
+Top Keywords:
+- 'sejarah' - history
+- 'candi' - temple
+- 'raja' - king
+- 'jogja' - Jogja
+- 'bangunan' - building
+
+Common Expressions:
+"nilai sejarah tinggi" (high historical value)
+"belajar sejarah" (learning history)
+"warisan budaya" (cultural heritage)
+
+5.5 FACILITIES (Score: +0.817)
+------------------------------
+Mentions: 805 | Positive: 89.2% | Negative: 7.5% | Neutral: 3.4%
+
+Top Keywords:
+- 'banyak' - many
+- 'fasilitas' - facilities
+- 'lengkap' - complete
+- 'luas' - spacious
+- 'parkir' - parking
+
+Common Expressions:
+"fasilitas lengkap" (complete facilities)
+"parkir luas" (spacious parking)
+"toilet bersih" (clean toilet)
+
+5.6 FOOD & BEVERAGE (Score: +0.745)
+-----------------------------------
+Mentions: 278 | Positive: 83.8% | Negative: 9.4% | Neutral: 6.8%
+
+Top Keywords:
+- 'banyak' - many
+- 'ikan' - fish
+- 'enak' - delicious
+- 'makanan' - food
+- 'makan' - eat
+
+Common Expressions:
+"ikan bakar enak" (delicious grilled fish)
+"seafood segar" (fresh seafood)
+"harga terjangkau" (affordable price)
+
+5.7 PRICE/VALUE (Score: +0.682)
+-------------------------------
+Mentions: 719 | Positive: 81.6% | Negative: 13.5% | Neutral: 4.9%
+
+Top Keywords:
+- 'harga' - price
+- 'murah' - cheap
+- 'tiket' - ticket
+- 'terjangkau' - affordable
+- 'masuk' - entry
+
+Common Expressions:
+"harga terjangkau" (affordable price)
+"tiket murah" (cheap ticket)
+"worth it" (worth it)
+
+Negative Expressions:
+"agak mahal" (a bit expensive)
+"harga tinggi" (high price)
+
+5.8 SERVICE (Score: +0.615)
+---------------------------
+Mentions: 283 | Positive: 80.2% | Negative: 18.7% | Neutral: 1.1%
+
+Top Keywords:
+- 'ramah' - friendly
+- 'baik' - good
+- 'membantu' - helpful
+- 'helpful' - helpful
+
+Common Expressions:
+"petugasnya ramah" (the staff is friendly)
+"pelayanan baik" (good service)
+"sangat membantu" (very helpful)
+
+5.9 CLEANLINESS (Score: +0.415)
+-------------------------------
+Mentions: 212 | Positive: 65.6% | Negative: 24.1% | Neutral: 10.4%
+
+Top Keywords:
+- 'bersih' - clean
+- 'sampah' - trash/garbage
+- 'kotor' - dirty
+- 'kebersihan' - cleanliness
+
+Positive Expressions:
+"tempatnya bersih" (the place is clean)
+"terawat dengan baik" (well maintained)
+
+Negative Expressions:
+"banyak sampah" (a lot of trash)
+"kurang bersih" (not clean enough)
+
+5.10 SAFETY (Score: +0.101)
+---------------------------
+Mentions: 129 | Positive: 51.9% | Negative: 41.9% | Neutral: 6.2%
+
+Top Keywords:
+- 'aman' - safe
+- 'ombaknya' - the waves
+- 'hati' - careful (hati-hati)
+- 'bahaya' - dangerous
+- 'anak' - children
+
+Positive Expressions:
+"lokasi aman" (safe location)
+"aman untuk keluarga" (safe for families)
+
+Negative Expressions:
+"ombaknya besar" (big waves)
+"hati-hati" (be careful)
+"bahaya" (dangerous)
+
+5.11 ACCESSIBILITY (Score: +0.059)
+----------------------------------
+Mentions: 357 | Positive: 49.9% | Negative: 44.0% | Neutral: 6.2%
+
+Top Keywords:
+- 'jalan' - road
+- 'mudah' - easy
+- 'akses' - access
+- 'jauh' - far
+- 'susah' - difficult
+
+Positive Expressions:
+"akses mudah" (easy access)
+"jalan bagus" (good road)
+
+Negative Expressions:
+"jalannya rusak" (damaged road)
+"akses sulit" (difficult access)
+"jauh dari kota" (far from city)
+
+5.12 CROWD LEVEL (Score: +0.043)
+--------------------------------
+Mentions: 302 | Positive: 48.0% | Negative: 43.7% | Neutral: 8.3%
+
+Top Keywords:
+- 'ramai' - crowded
+- 'banyak' - many
+- 'sepi' - quiet/empty
+- 'terlalu' - too (much)
+- 'pengunjung' - visitors
+
+Positive Expressions:
+"tidak terlalu ramai" (not too crowded)
+"sepi dan tenang" (quiet and peaceful)
+
+Negative Expressions:
+"terlalu ramai" (too crowded)
+"penuh pengunjung" (full of visitors)
+"weekend ramai sekali" (very crowded on weekends)
+
+================================================================================
+6. FILE REFERENCE
+================================================================================
+
+6.1 Word Clouds (35 files)
+--------------------------
+visualizations/absa_llm/wordcloud_scenery.png
+visualizations/absa_llm/wordcloud_scenery_positive.png
+visualizations/absa_llm/wordcloud_scenery_negative.png
+visualizations/absa_llm/wordcloud_cleanliness.png
+visualizations/absa_llm/wordcloud_cleanliness_positive.png
+visualizations/absa_llm/wordcloud_cleanliness_negative.png
+visualizations/absa_llm/wordcloud_facilities.png
+visualizations/absa_llm/wordcloud_facilities_positive.png
+visualizations/absa_llm/wordcloud_facilities_negative.png
+visualizations/absa_llm/wordcloud_price.png
+visualizations/absa_llm/wordcloud_price_positive.png
+visualizations/absa_llm/wordcloud_price_negative.png
+visualizations/absa_llm/wordcloud_atmosphere.png
+visualizations/absa_llm/wordcloud_atmosphere_positive.png
+visualizations/absa_llm/wordcloud_atmosphere_negative.png
+visualizations/absa_llm/wordcloud_historical_value.png
+visualizations/absa_llm/wordcloud_historical_value_positive.png
+visualizations/absa_llm/wordcloud_historical_value_negative.png
+visualizations/absa_llm/wordcloud_food.png
+visualizations/absa_llm/wordcloud_food_positive.png
+visualizations/absa_llm/wordcloud_food_negative.png
+visualizations/absa_llm/wordcloud_photo_spot.png
+visualizations/absa_llm/wordcloud_photo_spot_positive.png
+visualizations/absa_llm/wordcloud_crowd.png
+visualizations/absa_llm/wordcloud_crowd_positive.png
+visualizations/absa_llm/wordcloud_crowd_negative.png
+visualizations/absa_llm/wordcloud_service.png
+visualizations/absa_llm/wordcloud_service_positive.png
+visualizations/absa_llm/wordcloud_service_negative.png
+visualizations/absa_llm/wordcloud_accessibility.png
+visualizations/absa_llm/wordcloud_accessibility_positive.png
+visualizations/absa_llm/wordcloud_accessibility_negative.png
+visualizations/absa_llm/wordcloud_safety.png
+visualizations/absa_llm/wordcloud_safety_positive.png
+visualizations/absa_llm/wordcloud_safety_negative.png
+
+6.2 Charts and Heatmaps (5 files)
+---------------------------------
+visualizations/absa_llm/sentiment_distribution_by_aspect.png
+visualizations/absa_llm/sentiment_scores_by_aspect.png
+visualizations/absa_llm/mentions_by_aspect.png
+visualizations/absa_llm/aspect_cooccurrence_heatmap.png
+visualizations/absa_llm/top_keywords_by_aspect.png
+
+6.3 Summary Report (1 file)
+---------------------------
+visualizations/absa_llm/aspect_analysis_summary.txt
+
+================================================================================
+7. USAGE GUIDELINES
+================================================================================
+
+7.1 For Research Papers
+-----------------------
+The visualizations support qualitative discussion paragraphs. Example usage:
+
+"Scenery/View (+0.922) emerged as the highest-rated aspect with 1,032 mentions
+and 95.5% positive sentiment. Visitors consistently praised natural beauty using
+expressions such as 'pemandangannya indah banget' (the view is very beautiful),
+'view sunset mantap' (amazing sunset view), and 'pantainya bagus' (the beach is
+nice). The word cloud analysis reveals 'bagus' (good), 'indah' (beautiful), and
+'pemandangan' (view) as the dominant vocabulary."
+
+7.2 For Presentations
+---------------------
+- Use sentiment_scores_by_aspect.png for overall performance comparison
+- Use sentiment_distribution_by_aspect.png for detailed breakdown
+- Select specific word clouds for aspect-focused discussions
+
+7.3 Regenerating Visualizations
+-------------------------------
+Run the visualization script:
+  python src/visualization/absa_aspect_visualizations.py
+
+Requirements:
+- pandas, matplotlib, seaborn, wordcloud
+- Input: output/absa_llm_groq/absa_llm_results.csv (evidence text)
+- Statistics: output/absa_llm_groq/absa_llm_summary.csv (official counts)
+- Output: visualizations/absa_llm/
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
+
+Document Version: 1.0
+Last Updated: February 2026
