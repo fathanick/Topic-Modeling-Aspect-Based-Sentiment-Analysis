@@ -1,0 +1,10 @@
+{
+  "fig1_workflow": "output/figures/fig1_workflow.png",
+  "fig2_topic_sizes": "output/figures/fig2_topic_sizes.png",
+  "fig3_topic_words": "output/figures/fig3_topic_words.png",
+  "fig4_aspect_mentions": "output/figures/fig4_aspect_mentions.png",
+  "fig5_aspect_scores": "output/figures/fig5_aspect_scores.png",
+  "fig6_representational_gap": "output/figures/fig6_representational_gap.png",
+  "fig7_aspect_destination": "output/figures/fig7_aspect_destination.png",
+  "fig7_aspect_destination_sentence": "output/figures/fig7_aspect_destination.png"
+}

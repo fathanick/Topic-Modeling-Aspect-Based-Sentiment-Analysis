@@ -43,3 +43,9 @@ config.local.*
 
 # Large model files
 output/topic_modeling/bertopic_model
+
+# Figure-generation virtualenv
+.venv-figs/
+
+# BERTopic interactive HTML exports (large, regenerable)
+output/topic_modeling_final/visualizations/*.html
